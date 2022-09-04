@@ -1,4 +1,10 @@
-import {DrawingContext, DrawingContextDocument, DrawingShapePainter, SupportedShapes} from "../shapes";
+import {
+    DrawingContext,
+    DrawingContextDocument,
+    DrawingShapePainter,
+    DrawingShapeSettings,
+    SupportedShapes
+} from "../shapes";
 import {Point} from "../../../Common/point";
 import {ShapeFreehand} from "./shape-freehand";
 import DrawingShapeBehaviorBase from "../drawing-shape-behavior-base";
@@ -7,6 +13,15 @@ import NewShapeProfile from "../../Operation/NewShape/operation-new-shape-profil
 import {Nullable} from "../../../Common/generics";
 
 export class ShapeFreehandBehavior extends DrawingShapeBehaviorBase {
+    getSettings(shape: ShapeFreehand): DrawingShapeSettings {
+        return Object.assign(
+            super.getSettings(shape),
+            {
+                suppressBoundingRectOnCreation:true
+            } as DrawingShapeSettings
+        ) as DrawingShapeSettings
+    }
+
     getPainter(): DrawingShapePainter {
         return new ShapeFreehandPainter();
     }

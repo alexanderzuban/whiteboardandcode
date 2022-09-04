@@ -48,11 +48,18 @@ export interface DrawingShape {
     lineType?: Nullable<string>;
 }
 
+
+export interface DrawingShapeSettings {
+    suppressBoundingRectOnCreation:boolean;
+}
+
 export interface DrawingShapePainter {
     paint(shape: DrawingShape, context2d: CanvasRenderingContext2D): void;
 }
 
 export interface DrawingShapeBehavior {
+    getSettings(shape:DrawingShape):DrawingShapeSettings;
+
     newInstance(drawing: DrawingContext, payload: any): DrawingShape;
 
     demoInstance(size: number, profile?: NewShapeProfile): DrawingShape;

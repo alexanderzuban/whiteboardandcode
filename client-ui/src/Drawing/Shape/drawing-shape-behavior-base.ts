@@ -3,7 +3,7 @@ import {
     DrawingContextDocument,
     DrawingShape,
     DrawingShapeBehavior,
-    DrawingShapePainter,
+    DrawingShapePainter, DrawingShapeSettings,
     getShapeBehavior,
     SupportedShapes
 } from "./shapes";
@@ -12,6 +12,8 @@ import {Nullable, withNullable} from "../../Common/generics";
 import NewShapeProfile from "../Operation/NewShape/operation-new-shape-profile";
 import inDispatchDocument from "../Store/drawing-document-in-dispatch";
 import {DrawingShapeChangeType} from "../Store/drawing-document";
+import {ShapeFreehand} from "./FreeHand/shape-freehand";
+import {ShapeFreehandPainter} from "./FreeHand/shape-freehand-painter";
 
 
 export default class DrawingShapeBehaviorBase implements DrawingShapeBehavior {
@@ -161,6 +163,11 @@ export default class DrawingShapeBehaviorBase implements DrawingShapeBehavior {
 
     }
 
+    getSettings(shape: DrawingShape): DrawingShapeSettings {
+        return {
+            suppressBoundingRectOnCreation:false
+        } as DrawingShapeSettings;
+    }
 
     translateShape(shape: DrawingShape, context: Nullable<DrawingContextDocument>, dx: number, dy: number): void {
         for (let index = 1; index < shape.points.length; index++) {

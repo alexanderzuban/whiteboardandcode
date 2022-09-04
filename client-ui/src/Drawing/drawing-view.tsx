@@ -122,7 +122,7 @@ const DrawingView: React.FC = (props) => {
         logger.log("click", point)
     }
 
-    function touchStart(event: TouchEvent<HTMLElement>) {
+    function touchStart(event: TouchEvent<HTMLDivElement>) {
         if (!drawing) return;
         const point = touchAsPoint(drawing.origin, event);
         logger.log("touchStart", point)
@@ -130,7 +130,7 @@ const DrawingView: React.FC = (props) => {
         processStart(point, event)
     }
 
-    function touchMove(event: TouchEvent<HTMLElement>) {
+    function touchMove(event: TouchEvent<HTMLDivElement>) {
         if (!drawing) return;
         const point = touchAsPoint(drawing.origin, event);
         setTouchPoint(point)
@@ -140,7 +140,7 @@ const DrawingView: React.FC = (props) => {
         }));
     }
 
-    function touchEnd(event: TouchEvent<HTMLElement>) {
+    function touchEnd(event: TouchEvent<HTMLDivElement>) {
         logger.log("touchEnd", touchPoint)
         dispatch(sliceActionsContent.drawingOperationComplete({
             settings: appStore.getState().drawingSettings,
@@ -149,7 +149,7 @@ const DrawingView: React.FC = (props) => {
     }
 
 
-    function touchCancel(event: TouchEvent<HTMLElement>) {
+    function touchCancel(event: TouchEvent<HTMLDivElement>) {
         logger.log("touchCancel", touchPoint)
         dispatch(sliceActionsContent.drawingOperationComplete({
             settings: appStore.getState().drawingSettings,

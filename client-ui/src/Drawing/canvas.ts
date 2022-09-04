@@ -17,8 +17,19 @@ export function asPoint(origin: Point, event: MouseEvent<any>): Point {
 }
 
 export function touchAsPoint(origin: Point, event: TouchEvent<HTMLElement>): Point {
+    let offsetTop = 0;
+    let offsetLeft = 0;
+    let target = event.nativeEvent.target as  HTMLElement;
+
+    while (target !== null && target !== undefined){
+        offsetTop+= target.offsetTop;
+        offsetLeft+= target.offsetLeft;
+        target = target.offsetParent as HTMLElement;
+    }
+
+
     return {
-        x: event.nativeEvent.touches[0].clientX + origin.x,
-        y: event.nativeEvent.touches[0].clientY + origin.y
+        x: event.nativeEvent.touches[0].clientX + origin.x - offsetLeft,
+        y: event.nativeEvent.touches[0].clientY + origin.y - offsetTop
     } as Point;
 }
