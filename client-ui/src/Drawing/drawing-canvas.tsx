@@ -23,7 +23,8 @@ interface CanvasWrapperProps {
 const CanvasWrapper = styled.canvas<CanvasWrapperProps>`
   width: ${props => props.width}px;
   height: ${props => props.height}px;
-  cursor: ${props => props.cursor}
+  cursor: ${props => props.cursor};
+  touch-action: none
 `;
 
 interface DrawingCanvasProps {

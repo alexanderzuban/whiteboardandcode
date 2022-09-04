@@ -17,7 +17,8 @@ const ViewportWrapper = styled.div`
   padding: 0px;
   margin: 0px;
   overflow: hidden;
-  display: block
+  display: block;
+  touch-action: none
 `;
 
 
@@ -121,6 +122,7 @@ const DrawingView: React.FC = (props) => {
         const point = asPoint(drawing.origin, event);
         logger.log("click", point)
     }
+
 
     function touchStart(event: TouchEvent<HTMLDivElement>) {
         if (!drawing) return;
