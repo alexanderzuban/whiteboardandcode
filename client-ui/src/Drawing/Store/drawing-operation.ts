@@ -39,6 +39,8 @@ export const drawingOperationStart: CaseReducer<ContentState, PayloadAction<Draw
     operation: SupportedOperations
 }>>
     = function (state, action) {
+    logger.debug("drawingOperationStart", action.payload)
+    
     withCurrentDrawingDocument(state, document => {
         const context = {document, ...action.payload}
         withNullable(getOperationHandler(action.payload.operation), handler => {

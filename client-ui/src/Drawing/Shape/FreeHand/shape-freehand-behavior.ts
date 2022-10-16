@@ -9,15 +9,15 @@ import {Point} from "../../../Common/point";
 import {ShapeFreehand} from "./shape-freehand";
 import DrawingShapeBehaviorBase from "../drawing-shape-behavior-base";
 import {ShapeFreehandPainter} from "./shape-freehand-painter";
-import NewShapeProfile from "../../Operation/NewShape/operation-new-shape-profile";
 import {Nullable} from "../../../Common/generics";
+import NewShapeSettings from "../../Operation/NewShape/new-shape-settings";
 
 export class ShapeFreehandBehavior extends DrawingShapeBehaviorBase {
     getSettings(shape: ShapeFreehand): DrawingShapeSettings {
         return Object.assign(
             super.getSettings(shape),
             {
-                suppressBoundingRectOnCreation:true
+                suppressBoundingRectOnCreation: true
             } as DrawingShapeSettings
         ) as DrawingShapeSettings
     }
@@ -52,7 +52,7 @@ export class ShapeFreehandBehavior extends DrawingShapeBehaviorBase {
         return super.complete(shape, context, point, force);
     }
 
-    demoInstance(size: number, profile?: NewShapeProfile): ShapeFreehand {
+    demoInstance(size: number, profile?: NewShapeSettings): ShapeFreehand {
         const start = {x: 2, y: size / 2};
         const shape =
             this.demoShape(start, SupportedShapes.Freehand, "Freehand", profile) as ShapeFreehand;

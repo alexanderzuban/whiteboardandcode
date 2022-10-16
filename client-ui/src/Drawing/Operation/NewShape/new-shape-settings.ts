@@ -1,8 +1,6 @@
 import {SupportedShapes} from "../../Shape/shapes";
 
-export default interface NewShapeProfile {
-    name?: string,
-    key?: number,
+export default interface NewShapeSettings {
     readonly shape: SupportedShapes,
     fillColor?: string,
     fillStyle?: string,

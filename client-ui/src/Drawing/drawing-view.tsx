@@ -39,8 +39,9 @@ const DrawingView: React.FC = (props) => {
     }
     const drawing = file as DrawingDocument
 
-    function processStart(point: Point, event: { ctrlKey: boolean, altKey: boolean, shiftKey: boolean }) {
+    function processStart(point: Point, event: { ctrlKey: boolean, altKey: boolean, shiftKey: boolean, button: number }) {
         if (!drawing) return;
+        logger.debug("processStart", settings.selectedOperation, drawing.operation)
 
         if (drawing.operation) {
             dispatch(sliceActionsContent.drawingOperationResume({
@@ -51,6 +52,7 @@ const DrawingView: React.FC = (props) => {
         }
 
         function startOperation(operation: SupportedOperations) {
+            logger.debug("startOperation", operation)
             dispatch(sliceActionsContent.drawingOperationStart({
                 operation,
                 data: point,
@@ -82,7 +84,7 @@ const DrawingView: React.FC = (props) => {
             return;
         }
 
-        if (settings.selectedOperation) {
+        if (settings.selectedOperation !== null) {
             startOperation(settings.selectedOperation);
         }
     }
@@ -129,7 +131,7 @@ const DrawingView: React.FC = (props) => {
         const point = touchAsPoint(drawing.origin, event);
         logger.log("touchStart", point)
         setTouchPoint(point)
-        processStart(point, event)
+        processStart(point, Object.assign({}, event, {button: 0}))
     }
 
     function touchMove(event: TouchEvent<HTMLDivElement>) {

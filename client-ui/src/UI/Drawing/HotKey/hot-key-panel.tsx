@@ -8,12 +8,12 @@ import {logger} from "../../../Common/debug";
 
 const LeftPanelViewContent = styled.div`
   padding: 10px;
-  border-width: ${props => props.theme.navigationPanel.borderWidth}px;
-  border-color: ${props => props.theme.navigationPanel.borderColor};
+  border-width: ${props => props.theme.toolsPanel.borderWidth}px;
+  border-color: ${props => props.theme.toolsPanel.borderColor};
   border-style: solid;
 
-  background: ${props => props.theme.navigationPanel.backgroundColor};
-  border-radius: ${props => props.theme.navigationPanel.borderRadius}px;
+  background: ${props => props.theme.toolsPanel.backgroundColor};
+  border-radius: ${props => props.theme.toolsPanel.borderRadius}px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,7 +22,7 @@ const LeftPanelViewContent = styled.div`
 
   position: fixed;
   top: 100px;
-  width: 50px;
+  width: ${props => props.theme.toolsPanel.size}px;
   left: 5px;
   z-index: 1000;
 `;

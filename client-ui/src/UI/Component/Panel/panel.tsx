@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {StyledComponentProps} from "../../../Style/styled";
 
+
 export interface PanelProps extends StyledComponentProps {
     readonly  height: number;
     readonly  width: number;
@@ -14,11 +15,7 @@ export interface PanelProps extends StyledComponentProps {
     readonly  left: number;
 }
 
-const PanelDivComponent: React.FC<PanelProps> = (props) => <div
-    className={props.className}>{props.children}</div>;
-
-
-const Panel = styled(PanelDivComponent)`
+const Panel = styled.div<PanelProps>`
   width: ${props => props.width}px;
   height: ${props => props.height}px;
   position: fixed;

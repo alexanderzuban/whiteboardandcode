@@ -1,5 +1,16 @@
 import {DefaultTheme} from "styled-components";
-import {NavigationPanel} from "./styled";
+import {NavigationPanel, ToolsPanel} from "./styled";
+import {
+    ColorCeruleanBlue,
+    ColorGainsboro,
+    ColorGainsboroDark,
+    ColorLightGrey,
+    ColorNero,
+    ColorRegentStBlue,
+    ColorSlateGrey,
+    ColorTransparentRegentStBlue,
+    ColorWhiteSmoke
+} from "../Common/css-colors";
 
 const appTheme: DefaultTheme = {
     settings: {
@@ -7,28 +18,42 @@ const appTheme: DefaultTheme = {
     },
 
     ui: {
-        selectionColor: "rgba(168,208,222,1)",
-        selectionFillColor: "rgba(168,208,222,0.3)",
+        selectionColor: ColorRegentStBlue,
+        selectionFillColor: ColorTransparentRegentStBlue,
         savedFileColor: "blue",
         unsavedFileColor: "red"
     },
 
     navigationPanel: {
-        mainColor: "slategray",
+        mainColor: ColorSlateGrey,
         iconSize: 32,
         size: 36,
         borderWidth: 1,
-        borderColor: "lightgray",
+        borderColor: ColorLightGrey,
         borderRadius: 5,
-        backgroundColor: "#EBEBEB",
-        focusedBackgroundColor: "#E2E2E2",
-        selectedBackgroundColor: "#D9D9D9",
-        selectedMarkerColor: "#2770CB",
+        backgroundColor: ColorWhiteSmoke,
+        focusedBackgroundColor: ColorGainsboro,
+        selectedBackgroundColor: ColorGainsboroDark,
+        selectedMarkerColor: ColorCeruleanBlue,
     } as NavigationPanel,
 
+
+    toolsPanel: {
+        mainColor: ColorSlateGrey,
+        iconSize: 24,
+        size: 38,
+        borderWidth: 1,
+        borderColor: ColorLightGrey,
+        borderRadius: 5,
+        backgroundColor: ColorWhiteSmoke,
+        focusedBackgroundColor: ColorGainsboro,
+        selectedBackgroundColor: ColorGainsboroDark,
+        selectedMarkerColor: ColorCeruleanBlue,
+    } as ToolsPanel,
+
     content: {
-        mainColor: "#000",
-        backgroundColor: "#F8F8F8"
+        mainColor: ColorNero,
+        backgroundColor: ColorWhiteSmoke
     }
 };
 

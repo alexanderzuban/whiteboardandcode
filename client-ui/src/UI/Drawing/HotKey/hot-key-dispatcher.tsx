@@ -1,50 +1,51 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import store, {AppState} from "../../../Store/App.store";
+import {AppState} from "../../../Store/App.store";
 import HotKeySetup from "./hot-key-setup";
-import {SupportedOperations} from "../../../Drawing/Operation/operations";
-import {sliceActionsAppHotKeys, SupportedHotKeyCategories} from "./hotkeys.store";
-import {sliceActionsDrawingSettings} from "../../../Drawing/Store/drawing-settings.store";
+import {SupportedHotKeyCategories} from "./hotkeys.store";
 import {logger} from "../../../Common/debug";
+import {sliceActionsDrawingSettings} from "../../../Drawing/Store/drawing-settings.store";
+import {SupportedOperations} from "../../../Drawing/Operation/operations";
 
 
 const HotKeyDispatcher: React.FC = (props) => {
 
     const [initialized, setInitialized] = useState(false);
 
-    const selectedHotKey = useSelector((state: AppState) => state.appHotKeys.toggledKey);
+
+    const activeProfile = useSelector((state: AppState) => state.appHotKeys.activeProfile);
+    const activeCategory = useSelector((state: AppState) => state.appHotKeys.activeCategory);
     const dispatch = useDispatch();
 
-    logger.log("HotKeyDispatcher", initialized, selectedHotKey);
+    logger.log("HotKeyDispatcher", initialized, activeProfile);
 
     useEffect(() => {
-        if (initialized && selectedHotKey !== "") {
-            const selectedCategory = store.getState().appHotKeys.toggledCategory;
-            const category = store.getState().appHotKeys.categories.find(c => c.key === selectedCategory);
-            if (category) {
-                const index = parseInt(selectedHotKey);
-                logger.log("HotKeyDispatcher", selectedCategory, index, category.actions[index]);
-                switch (selectedCategory) {
-                    case SupportedHotKeyCategories.ShapeProfile:
-                        dispatch(sliceActionsDrawingSettings.newShapeSelectProfile(Number(category.actions[index])));
-                        break;
-                    case SupportedHotKeyCategories.LineColor:
-                        dispatch(sliceActionsDrawingSettings.newShapeSelectLineColor(category.actions[index]));
-                        break;
-                    case SupportedHotKeyCategories.LineWidth:
-                        dispatch(sliceActionsDrawingSettings.newShapeSelectLineWidth(parseInt(category.actions[index])));
-                        break;
-                    case SupportedHotKeyCategories.FillColor:
-                        dispatch(sliceActionsDrawingSettings.newShapeSelectFillColor(category.actions[index]));
-                        break;
-                    case SupportedHotKeyCategories.Operation:
-                        dispatch(sliceActionsDrawingSettings.drawingOperationSelect(parseInt(category.actions[index]) as SupportedOperations));
-                        break;
-                }
-                dispatch(sliceActionsAppHotKeys.toggleHotKey)
+        if (initialized && (activeProfile || activeCategory)) {
+
+            switch (activeCategory) {
+                case SupportedHotKeyCategories.Select:
+                    dispatch(sliceActionsDrawingSettings.drawingOperationSelect(SupportedOperations.None));
+                    break;
+                case SupportedHotKeyCategories.Draw:
+                    dispatch(sliceActionsDrawingSettings.drawingOperationSelect(SupportedOperations.NewShape));
+                    break;
+                case SupportedHotKeyCategories.Shape:
+                    dispatch(sliceActionsDrawingSettings.drawingOperationSelect(SupportedOperations.NewShape));
+                    break;
+                case SupportedHotKeyCategories.Line:
+                    dispatch(sliceActionsDrawingSettings.drawingOperationSelect(SupportedOperations.NewShape));
+                    break;
+                case SupportedHotKeyCategories.Text:
+                    dispatch(sliceActionsDrawingSettings.drawingOperationSelect(SupportedOperations.NewShape));
+                    break;
             }
+
+            if (activeProfile) {
+                dispatch(sliceActionsDrawingSettings.drawingProfileSelect(activeProfile))
+            }
+
         }
-    }, [selectedHotKey, initialized, dispatch]);
+    }, [activeProfile, activeCategory, initialized, dispatch]);
 
 
     useEffect(() => {

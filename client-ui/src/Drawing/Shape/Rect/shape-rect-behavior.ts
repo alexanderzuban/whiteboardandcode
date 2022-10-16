@@ -3,7 +3,7 @@ import {ShapeRectPainter} from "./shape-rect-painter";
 import {Point} from "../../../Common/point";
 import {ShapeRect} from "./shape-rect";
 import DrawingShapeBehaviorBase from "../drawing-shape-behavior-base";
-import NewShapeProfile from "../../Operation/NewShape/operation-new-shape-profile";
+import NewShapeSettings from "../../Operation/NewShape/new-shape-settings";
 
 export class ShapeRectBehavior extends DrawingShapeBehaviorBase {
     getPainter(): DrawingShapePainter {
@@ -16,7 +16,7 @@ export class ShapeRectBehavior extends DrawingShapeBehaviorBase {
     }
 
 
-    demoInstance(size: number, profile?: NewShapeProfile): ShapeRect {
+    demoInstance(size: number, profile?: NewShapeSettings): ShapeRect {
         const start = {x: 2, y: 2} as Point;
         const shape = this.demoShape(start, SupportedShapes.Rect, "Rect", profile) as ShapeRect;
 

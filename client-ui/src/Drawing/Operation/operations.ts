@@ -8,6 +8,7 @@ import {OperationHoverHandler} from "./Hover/operation-hover";
 import {OperationEraseHandler} from "./Erase/operation-erase";
 import {DrawingContext} from "../Shape/shapes";
 import {CssCursors} from "../../Common/css-cursors";
+import {OperationNoneHandler} from "./None/operation-none";
 
 
 export enum SupportedOperations {
@@ -50,6 +51,7 @@ export interface DrawingOperationHandler {
 }
 
 const OperationsLookup = new Map<SupportedOperations, DrawingOperationHandler>([
+    [SupportedOperations.None, new OperationNoneHandler()],
     [SupportedOperations.Pan, new OperationPanHandler()],
     [SupportedOperations.NewShape, new OperationNewShapeHandler()],
     [SupportedOperations.Select, new OperationSelectHandler()],

@@ -1,26 +1,18 @@
-import React, {useEffect, useMemo, useState} from "react";
+import React, {useMemo} from "react";
 import useEventListener from "@use-it/event-listener";
 import {useDispatch, useSelector} from "react-redux";
 import appStore, {AppState} from "../../Store/App.store";
-import {useTheme} from "styled-components";
 import {sliceActionsAppHotKeys, SupportedHotKeyCategories} from "./HotKey/hotkeys.store";
 import {sliceActionsContent} from "../Content/Store/content.store";
 import {logger} from "../../Common/debug";
 
-interface AppKeyboardState {
-    readonly  category: string
-}
-
-const emptyKeyboardState = {category: ''} as AppKeyboardState;
 
 const DrawingKeyboardListener: React.FC = () => {
     logger.render("DrawingKeyboardListener");
 
-    const [keyboardState, setKeyboardState] = useState(emptyKeyboardState);
     const categories = useSelector((state: AppState) => state.appHotKeys.categories);
 
     const dispatch = useDispatch();
-    const theme = useTheme();
 
     const categoryLookup = useMemo(() => {
         const categoryLookup = new Map<String, SupportedHotKeyCategories>();
@@ -33,16 +25,12 @@ const DrawingKeyboardListener: React.FC = () => {
 
         const category = categoryLookup.get(e.key)
         if (category !== undefined) {
-            setKeyboardState({
-                category: e.key
-            });
             dispatch(sliceActionsAppHotKeys.toggleHotKeyCategory(category));
             return;
         }
 
-        if (keyboardState.category !== '' && e.key.match('[0-9]')) {
-            setKeyboardState(emptyKeyboardState);
-            dispatch(sliceActionsAppHotKeys.toggleHotKey(e.key));
+        if (e.key.match('[0-9]')) {
+            dispatch(sliceActionsAppHotKeys.toggleHotKeyProfile(e.key));
             return;
         }
 
@@ -82,18 +70,6 @@ const DrawingKeyboardListener: React.FC = () => {
                 break;
         }
     });
-
-    useEffect(() => {
-        const timer = keyboardState.category !== '' ? setTimeout(() => {
-                //reset keyboard after inactivity period
-                setKeyboardState(emptyKeyboardState);
-            }, theme.settings.hotKeyDelay)
-            : null;
-        logger.log("timer", timer)
-        return () => {
-            timer && clearTimeout(timer)
-        };
-    }, [keyboardState, theme]);
 
     return (<></>);
 }

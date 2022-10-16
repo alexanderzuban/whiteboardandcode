@@ -1,15 +1,16 @@
 import {IconProp} from "@fortawesome/fontawesome-svg-core";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {Nullable, withNullable} from "../../../Common/generics";
+import {Nullable} from "../../../Common/generics";
 import {logger} from "../../../Common/debug";
+import {DrawingProfile} from "../../../Drawing/Profile/profile";
 
 
 export enum SupportedHotKeyCategories {
-    ShapeProfile = "s",
-    LineWidth = "w",
-    LineColor = "c",
-    FillColor = "f",
-    Operation = "q",
+    Select = "a",
+    Draw = "d",
+    Shape = "s",
+    Line = "l",
+    Text = "t"
 }
 
 export interface HotKeyCategory {
@@ -17,60 +18,64 @@ export interface HotKeyCategory {
     tooltip: string,
     icon: IconProp,
     key: SupportedHotKeyCategories,
-    actions: string[],
-    selectedIndex?: number | undefined
+    profiles: string[],
+    selectedProfile: Nullable<string>
 }
 
 
 export const HotKeyCategories = [
     {
-        name: "Current Operation",
-        tooltip: "Activate Current Operation\n Press 'q' and next promptly 0-9 to switch active operation",
-        icon: ["fal", "file-pen"],
-        key: SupportedHotKeyCategories.Operation,
-        actions: []
+        name: "Selection",
+        tooltip: "Selection ('a')",
+        icon: ["fal", "arrow-pointer"],
+        key: SupportedHotKeyCategories.Select,
+        profiles: [],
+        selectedProfile: null
     } as HotKeyCategory,
     {
-        name: "Shape Profiles",
-        tooltip: "Select active shape profile. Press 's' and next promptly 0-9 to switch between profiles",
-        icon: ["fal", "shapes"],
-        key: SupportedHotKeyCategories.ShapeProfile,
-        actions: []
-    } as HotKeyCategory,
-    {
-        name: "Line Width",
-        tooltip: "Select shape line width\n Press 'w' and next promptly 0-9 to switch line width",
+        name: "Draw",
+        tooltip: "Draw ('d')\n use 0-9 to switch between drawing modes",
         icon: ["fal", "pen-line"],
-        key: SupportedHotKeyCategories.LineWidth,
-        actions: []
+        key: SupportedHotKeyCategories.Draw,
+        profiles: [],
+        selectedProfile: null
     } as HotKeyCategory,
     {
-        name: "Line Color",
-        tooltip: "Select shape line color\n Press 'c' and next promptly 0-9 to switch line color",
-        icon: ["fal", "palette"],
-        key: SupportedHotKeyCategories.LineColor,
-        actions: []
+        name: "Shape",
+        tooltip: "Shape ('s')\n use 0-9 to switch between shape profiles",
+        icon: ["fal", "shapes"],
+        key: SupportedHotKeyCategories.Shape,
+        profiles: [],
+        selectedProfile: null
     } as HotKeyCategory,
     {
-        name: "Fill Color",
-        tooltip: "Select shape fill color\n Press 'f' and next promptly 0-9 to switch fill color",
-        icon: ["fal", "fill"],
-        key: SupportedHotKeyCategories.FillColor,
-        actions: []
+        name: "Line",
+        tooltip: "Line ('l')\n use 0-9 to switch between line profiles",
+        icon: ["fal", "arrow-right"],
+        key: SupportedHotKeyCategories.Line,
+        profiles: [],
+        selectedProfile: null
+    } as HotKeyCategory,
+    {
+        name: "Text",
+        tooltip: "Text ('t')",
+        icon: ["fal", "text"],
+        key: SupportedHotKeyCategories.Text,
+        profiles: [],
+        selectedProfile: null
     } as HotKeyCategory
-
 ]
 
 export interface AppHotKeysState {
     readonly categories: HotKeyCategory[]
-    readonly toggledCategory: Nullable<SupportedHotKeyCategories>
-    readonly toggledKey: string
+    activeCategory: Nullable<SupportedHotKeyCategories>
+    activeProfile: Nullable<string>
 }
 
 const initialState = {
     categories: HotKeyCategories,
-    toggledCategory: null,
-    toggledKey: ''
+    activeCategory: null,
+    activeProfile: null
 } as AppHotKeysState;
 
 
@@ -78,56 +83,74 @@ const sliceAppHotKeys = createSlice({
     name: 'appHotKeys',
     initialState,
     reducers: {
-        selectActionForEdit(state, action: PayloadAction<{ category: SupportedHotKeyCategories, index: number }>) {
-            logger.log("selectActionForEdit", action.payload);
-
-            const selectedCategory = state.categories.find(c => c.key === action.payload.category);
-            if (selectedCategory) {
-                selectedCategory.selectedIndex = action.payload.index
-            }
+        registerHotKeyCategory(state, action: PayloadAction<HotKeyCategory>) {
+            logger.log("registerHotKeyCategory", action.payload);
+            state.categories.push(action.payload);
         },
-        registerHotKeyAction(state, action: PayloadAction<{ category: SupportedHotKeyCategories, action: string, index?: number }>) {
-            logger.log("registerHotKeyAction", action.payload);
+        registerHotKeyProfile(state, action: PayloadAction<{ category: SupportedHotKeyCategories, profile: DrawingProfile, index?: number }>) {
+            logger.log("registerHotKeyProfile", action.payload);
 
             const selectedCategory = state.categories.find(c => c.key === action.payload.category);
             if (selectedCategory) {
+                if (selectedCategory.profiles === undefined) {
+                    selectedCategory.profiles = [];
+                }
                 if (action.payload.index !== undefined) {
-                    selectedCategory.actions[action.payload.index] = action.payload.action;
+                    selectedCategory.profiles[action.payload.index] = action.payload.profile.uid
                 } else {
-                    selectedCategory.actions.push(action.payload.action);
+                    selectedCategory.profiles.push(action.payload.profile.uid)
                 }
             }
         },
-        registerHotKeyCategory(state, action: PayloadAction<HotKeyCategory>) {
-            logger.log("toggleHotKeyCategory", action.payload);
-            state.categories.push(action.payload);
-        },
         toggleHotKeyCategory(state, action: PayloadAction<SupportedHotKeyCategories>) {
             logger.log("toggleHotKeyCategory", action.payload);
+            if (state.activeCategory === action.payload) {
+                return
+            }
 
-            state.toggledCategory = null;
-            state.toggledKey = '';
+            state.activeCategory = null
+            state.activeProfile = null
+            const category = state.categories.find(c => c.key === action.payload)
 
-            if (state.categories.find(c => c.key === action.payload)) {
-                state.toggledCategory = action.payload;
+            if (category) {
+                state.activeCategory = action.payload;
+                if (category.selectedProfile) {
+                    state.activeProfile = category.selectedProfile
+                } else {
+                    if (category.profiles && category.profiles.length > 0) {
+                        state.activeProfile = category.profiles[0]
+                        category.selectedProfile = state.activeProfile;
+                    }
+                }
             }
         },
-        toggleHotKey(state, action: PayloadAction<string>) {
-            if (state.toggledCategory !== null && action.payload.match('[0-9]')) {
-                state.toggledKey = action.payload;
+        toggleHotKeyProfile(state, action: PayloadAction<string>) {
+            logger.log("toggleHotKeyProfile", action.payload, state.activeCategory);
+            if (state.activeCategory !== null) {
+                const category = state.categories.find(c => c.key === state.activeCategory)
+                let profile: Nullable<string>
+
+                if (category && category.profiles) {
+                    profile = category.profiles.find(p => p === action.payload)
+                }
+
+                if (!profile && action.payload.match('[0-9]')) {
+                    const selectedIndex = Number(action.payload)
+                    logger.log("toggleHotKeyProfile-selectedIndex", selectedIndex);
+                    if (category && category.profiles && category.profiles.length > selectedIndex) {
+                        profile = category.profiles[selectedIndex]
+                    }
+                    logger.log("toggleHotKeyProfile-selectedIndex", profile);
+                }
+
+                if (profile && category) {
+                    state.activeProfile = profile
+                    category.selectedProfile = profile
+                }
             } else {
-                state.toggledCategory = null;
-                state.toggledKey = '';
+                state.activeCategory = null
+                state.activeProfile = null
             }
-
-            if (state.toggledCategory && state.toggledKey !== '') {
-                withNullable(state.categories.find(c => c.key === state.toggledCategory), c => {
-                    c.selectedIndex = Number(state.toggledKey)
-                    logger.log(state.toggledCategory, "category", c.key, "selecteIndex", c.selectedIndex, state.toggledKey)
-                });
-            }
-
-            logger.log("toggleHotKey", {category: state.toggledCategory, key: state.toggledKey});
         }
     },
 });

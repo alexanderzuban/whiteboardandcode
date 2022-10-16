@@ -9,10 +9,10 @@ import {Point} from "../../../Common/point";
 import {ShapePolyline} from "./shape-polyline";
 import {ShapePolylinePainter} from "./shape-polyline-painter";
 import DrawingShapeBehaviorBase from "../drawing-shape-behavior-base";
-import NewShapeProfile from "../../Operation/NewShape/operation-new-shape-profile";
 import inDispatchDocument from "../../Store/drawing-document-in-dispatch";
 import {DrawingShapeChangeType} from "../../Store/drawing-document";
 import {Nullable} from "../../../Common/generics";
+import NewShapeSettings from "../../Operation/NewShape/new-shape-settings";
 
 export class ShapePolylineBehavior extends DrawingShapeBehaviorBase {
     getPainter(): DrawingShapePainter {
@@ -40,7 +40,7 @@ export class ShapePolylineBehavior extends DrawingShapeBehaviorBase {
     }
 
 
-    demoInstance(size: number, profile?: NewShapeProfile): ShapePolyline {
+    demoInstance(size: number, profile?: NewShapeSettings): ShapePolyline {
         const start = {x: 2, y: size / 2} as Point;
         const shape = this.demoShape(start, SupportedShapes.Polyline, "Polyline", profile) as ShapePolyline;
         this.extendTo(shape, null, start);

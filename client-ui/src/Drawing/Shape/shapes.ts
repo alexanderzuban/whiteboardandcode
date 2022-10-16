@@ -5,7 +5,7 @@ import {ShapeLineBehavior} from "./Line/shape-line-behavior";
 import {ShapeCircleBehavior} from "./Circle/shape-circle-behavior";
 import {ShapeFreehandBehavior} from "./FreeHand/shape-freehand-behavior";
 import {ShapePolylineBehavior} from "./Polyline/shape-polyline-behavior";
-import NewShapeProfile from "../Operation/NewShape/operation-new-shape-profile";
+import NewShapeProperties from "../Operation/NewShape/new-shape-settings";
 import {DrawingSettings} from "../Store/drawing-settings.store";
 import {DrawingDocument} from "../Store/drawing-document";
 import DrawingShapeBehaviorBase from "./drawing-shape-behavior-base";
@@ -50,7 +50,7 @@ export interface DrawingShape {
 
 
 export interface DrawingShapeSettings {
-    suppressBoundingRectOnCreation:boolean;
+    suppressBoundingRectOnCreation: boolean;
 }
 
 export interface DrawingShapePainter {
@@ -58,11 +58,11 @@ export interface DrawingShapePainter {
 }
 
 export interface DrawingShapeBehavior {
-    getSettings(shape:DrawingShape):DrawingShapeSettings;
+    getSettings(shape: DrawingShape): DrawingShapeSettings;
 
     newInstance(drawing: DrawingContext, payload: any): DrawingShape;
 
-    demoInstance(size: number, profile?: NewShapeProfile): DrawingShape;
+    demoInstance(size: number, profile?: NewShapeProperties): DrawingShape;
 
     extendTo(shape: DrawingShape, context: Nullable<DrawingContextDocument>, point: Point): DrawingShape;
 
@@ -74,7 +74,7 @@ export interface DrawingShapeBehavior {
 
     isShapeTouchOrOverlap(shape: DrawingShape, ...points: Point[]): boolean;
 
-    shapeProfile(shape: DrawingShape): NewShapeProfile;
+    shapeProfile(shape: DrawingShape): NewShapeProperties;
 
 
     getPointsCount(shape: DrawingShape): number

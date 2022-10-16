@@ -16,6 +16,20 @@ export interface NavigationPanel {
     selectedMarkerColor: string;
 }
 
+export interface ToolsPanel {
+    mainColor: string;
+    iconSize: number;
+    size: number;
+    backgroundColor: string;
+    borderWidth: number;
+    borderRadius: number;
+    borderColor: string;
+
+    focusedBackgroundColor: string;
+    selectedBackgroundColor: string;
+    selectedMarkerColor: string;
+}
+
 // and extend them!
 declare module 'styled-components' {
 
@@ -30,6 +44,7 @@ declare module 'styled-components' {
             unsavedFileColor: string
         }
         navigationPanel: NavigationPanel;
+        toolsPanel: ToolsPanel;
 
         content: {
             mainColor: string

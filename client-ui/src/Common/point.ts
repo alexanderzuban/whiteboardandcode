@@ -5,6 +5,16 @@ export interface Point {
     y: number
 }
 
+export interface EventPoint {
+    x: number,
+    y: number,
+
+    altKey: boolean,
+    ctrlKey: boolean,
+    shiftKey: boolean,
+    button: number;
+}
+
 
 export interface Rect {
     topLeft: Point,

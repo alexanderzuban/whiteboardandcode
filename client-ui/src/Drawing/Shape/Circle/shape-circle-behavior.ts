@@ -3,7 +3,7 @@ import {Point} from "../../../Common/point";
 import {ShapeCirclePainter} from "./shape-circle-painter";
 import {ShapeCircle} from "./shape-circle";
 import DrawingShapeBehaviorBase from "../drawing-shape-behavior-base";
-import NewShapeProfile from "../../Operation/NewShape/operation-new-shape-profile";
+import NewShapeSettings from "../../Operation/NewShape/new-shape-settings";
 
 export class ShapeCircleBehavior extends DrawingShapeBehaviorBase {
     getPainter(): DrawingShapePainter {
@@ -14,7 +14,7 @@ export class ShapeCircleBehavior extends DrawingShapeBehaviorBase {
         return this.initialShape(context, start, SupportedShapes.Circle, "Circle") as ShapeCircle;
     }
 
-    demoInstance(size: number, profile?: NewShapeProfile): ShapeCircle {
+    demoInstance(size: number, profile?: NewShapeSettings): ShapeCircle {
         const start = {x: 2, y: 2} as Point;
         const shape =
             this.demoShape(start, SupportedShapes.Circle, "Circle", profile) as ShapeCircle;

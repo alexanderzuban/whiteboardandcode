@@ -6,6 +6,7 @@ import {OperationNewShapePainter} from "./operation-new-shape-painter";
 import {CssCursors} from "../../../Common/css-cursors";
 import inDispatchDocument from "../../Store/drawing-document-in-dispatch";
 import {logger} from "../../../Common/debug";
+import inDispatchDrawingSettings from "../../Store/drawing-settings-in-dispatch";
 
 export interface OperationNewShape extends DrawingOperation {
     type: SupportedOperations.NewShape,
@@ -20,9 +21,11 @@ export interface OperationNewShape extends DrawingOperation {
 
 export class OperationNewShapeHandler implements DrawingOperationHandler {
     start(context: DrawingContext, payload: Point): Nullable<OperationNewShape> {
+        const profile = inDispatchDrawingSettings.activeProfile(context.settings);
+
         return {
             type: SupportedOperations.NewShape,
-            shapeType: context.settings.newShapeSettings.shape,
+            shapeType: profile?.settings?.shape ?? SupportedShapes.None,
             currentShape: null,
             start: payload,
             end: payload,
@@ -64,7 +67,7 @@ export class OperationNewShapeHandler implements DrawingOperationHandler {
 
     getOperationCursor(operation: Nullable<DrawingOperation>): CssCursors {
         if (operation) {
-            return "e-resize";
+            return "crosshair";
         }
         return "default";
     }

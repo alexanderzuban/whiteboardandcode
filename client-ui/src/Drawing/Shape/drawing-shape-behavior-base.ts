@@ -3,17 +3,17 @@ import {
     DrawingContextDocument,
     DrawingShape,
     DrawingShapeBehavior,
-    DrawingShapePainter, DrawingShapeSettings,
+    DrawingShapePainter,
+    DrawingShapeSettings,
     getShapeBehavior,
     SupportedShapes
 } from "./shapes";
 import {calcBoundingRect, calcBoundingRectForPointsArray, movePoint, Point, Rect} from "../../Common/point";
 import {Nullable, withNullable} from "../../Common/generics";
-import NewShapeProfile from "../Operation/NewShape/operation-new-shape-profile";
 import inDispatchDocument from "../Store/drawing-document-in-dispatch";
 import {DrawingShapeChangeType} from "../Store/drawing-document";
-import {ShapeFreehand} from "./FreeHand/shape-freehand";
-import {ShapeFreehandPainter} from "./FreeHand/shape-freehand-painter";
+import inDispatchDrawingSettings from "../Store/drawing-settings-in-dispatch";
+import NewShapeSettings from "../Operation/NewShape/new-shape-settings";
 
 
 export default class DrawingShapeBehaviorBase implements DrawingShapeBehavior {
@@ -21,6 +21,7 @@ export default class DrawingShapeBehaviorBase implements DrawingShapeBehavior {
     protected initialShape(context: DrawingContext, start: Nullable<Point>, type: SupportedShapes, name: string): DrawingShape {
 
         const key = Date.now();
+        const profile = inDispatchDrawingSettings.activeProfile(context.settings)
 
         return {
             type,
@@ -35,9 +36,9 @@ export default class DrawingShapeBehaviorBase implements DrawingShapeBehavior {
                 bottomRight: start
             } as Rect,
 
-            color: context.settings.newShapeSettings.lineColor ?? "black",
-            lineWidth: context.settings.newShapeSettings.lineWidth ?? 1,
-            fillColor: context.settings.newShapeSettings.fillColor ?? "",
+            color: profile?.settings?.lineColor ?? "black",
+            lineWidth: profile?.settings?.lineWidth ?? 1,
+            fillColor: profile?.settings?.fillColor ?? "",
 
             points: [],
             label: null,
@@ -45,7 +46,7 @@ export default class DrawingShapeBehaviorBase implements DrawingShapeBehavior {
         } as DrawingShape;
     }
 
-    shapeProfile(shape: DrawingShape): NewShapeProfile {
+    shapeProfile(shape: DrawingShape): NewShapeSettings {
         const profile = {
             shape: shape.type,
             fillColor: shape.fillColor,
@@ -53,11 +54,11 @@ export default class DrawingShapeBehaviorBase implements DrawingShapeBehavior {
             lineWidth: shape.lineWidth,
             lineColor: shape.color,
             lineType: shape.lineType
-        } as NewShapeProfile
+        } as NewShapeSettings
         return profile;
     }
 
-    protected demoShape(start: Nullable<Point>, type: SupportedShapes, name: string, profile?: NewShapeProfile): DrawingShape {
+    protected demoShape(start: Nullable<Point>, type: SupportedShapes, name: string, profile?: NewShapeSettings): DrawingShape {
         const key = -1;
 
         return {
@@ -127,7 +128,7 @@ export default class DrawingShapeBehaviorBase implements DrawingShapeBehavior {
         return {} as DrawingShape;
     };
 
-    demoInstance(size: number, profile?: NewShapeProfile): DrawingShape {
+    demoInstance(size: number, profile?: NewShapeSettings): DrawingShape {
         return {} as DrawingShape;
     };
 
@@ -165,7 +166,7 @@ export default class DrawingShapeBehaviorBase implements DrawingShapeBehavior {
 
     getSettings(shape: DrawingShape): DrawingShapeSettings {
         return {
-            suppressBoundingRectOnCreation:false
+            suppressBoundingRectOnCreation: false
         } as DrawingShapeSettings;
     }
 
