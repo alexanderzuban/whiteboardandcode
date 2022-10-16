@@ -1,6 +1,6 @@
 import {DrawingProfile, DrawingProfileType} from "./profile";
 import {DrawingOperation, SupportedOperations} from "../Operation/operations";
-import {SupportedShapes} from "../Shape/shapes";
+import {DrawingShapeStyle, SupportedShapes} from "../Shape/shapes";
 import {
     ColorCrimson,
     ColorNero,
@@ -18,8 +18,10 @@ const Pen1 = {
     operation: {type: SupportedOperations.NewShape} as DrawingOperation,
     settings: {
         shape: SupportedShapes.Freehand,
-        lineColor: ColorNero,
-        lineWidth: 3
+        style: {
+            lineColor: ColorNero,
+            lineWidth: 3
+        } as DrawingShapeStyle
     } as NewShapeSettings,
     icon: ["fas", "pen"],
     type: DrawingProfileType.Pen,
@@ -32,8 +34,10 @@ const Pen2 = {
     operation: {type: SupportedOperations.NewShape} as DrawingOperation,
     settings: {
         shape: SupportedShapes.Freehand,
-        lineColor: ColorCrimson,
-        lineWidth: 3
+        style: {
+            lineColor: ColorCrimson,
+            lineWidth: 3
+        } as DrawingShapeStyle
     } as NewShapeSettings,
     icon: ["fas", "pen"],
     type: DrawingProfileType.Pen,
@@ -46,8 +50,10 @@ const Pen3 = {
     operation: {type: SupportedOperations.NewShape} as DrawingOperation,
     settings: {
         shape: SupportedShapes.Freehand,
-        lineColor: ColorPigmentGreen,
-        lineWidth: 3
+        style: {
+            lineColor: ColorPigmentGreen,
+            lineWidth: 3
+        } as DrawingShapeStyle
     } as NewShapeSettings,
     icon: ["fas", "pen"],
     type: DrawingProfileType.Pen,
@@ -60,8 +66,10 @@ const Highlighter1 = {
     operation: {type: SupportedOperations.NewShape} as DrawingOperation,
     settings: {
         shape: SupportedShapes.Freehand,
-        lineColor: ColorTransparentYellow,
-        lineWidth: 7
+        style: {
+            lineColor: ColorTransparentYellow,
+            lineWidth: 7
+        } as DrawingShapeStyle
     } as NewShapeSettings,
     icon: ["fas", "highlighter"],
     type: DrawingProfileType.Highlighter,
@@ -74,8 +82,10 @@ const Highlighter2 = {
     operation: {type: SupportedOperations.NewShape} as DrawingOperation,
     settings: {
         shape: SupportedShapes.Freehand,
-        lineColor: ColorTransparentBurntOrange,
-        lineWidth: 7
+        style: {
+            lineColor: ColorTransparentBurntOrange,
+            lineWidth: 7
+        } as DrawingShapeStyle
     } as NewShapeSettings,
     icon: ["fas", "highlighter"],
     type: DrawingProfileType.Highlighter,

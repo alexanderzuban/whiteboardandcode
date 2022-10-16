@@ -1,4 +1,5 @@
 import {
+    DefaultShapeStyle,
     DrawingContext,
     DrawingContextDocument,
     DrawingShape,
@@ -36,10 +37,8 @@ export default class DrawingShapeBehaviorBase implements DrawingShapeBehavior {
                 bottomRight: start
             } as Rect,
 
-            color: profile?.settings?.lineColor ?? "black",
-            lineWidth: profile?.settings?.lineWidth ?? 1,
-            fillColor: profile?.settings?.fillColor ?? "",
-
+            style: Object.assign({}, DefaultShapeStyle, profile?.settings?.style),
+            
             points: [],
             label: null,
             rotate: null
@@ -49,11 +48,7 @@ export default class DrawingShapeBehaviorBase implements DrawingShapeBehavior {
     shapeProfile(shape: DrawingShape): NewShapeSettings {
         const profile = {
             shape: shape.type,
-            fillColor: shape.fillColor,
-            fillStyle: shape.fillStyle,
-            lineWidth: shape.lineWidth,
-            lineColor: shape.color,
-            lineType: shape.lineType
+            style: Object.assign({}, shape.style)
         } as NewShapeSettings
         return profile;
     }
@@ -74,9 +69,7 @@ export default class DrawingShapeBehaviorBase implements DrawingShapeBehavior {
                 bottomRight: start
             } as Rect,
 
-            color: profile?.lineColor ?? "black",
-            lineWidth: profile?.lineWidth ?? 1,
-            fillColor: profile?.fillColor ?? "",
+            style: Object.assign({}, DefaultShapeStyle, profile?.style),
 
             points: [],
             label: null,

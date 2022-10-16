@@ -44,7 +44,7 @@ const ProfilePlaceholderView: React.FC<ProfilePlaceholderViewProps> = (props) =>
             focusedBackgroundColor={theme.toolsPanel.focusedBackgroundColor}>
             <FontAwesomeIcon
                 icon={profile?.icon ?? ['fal', 'question']}
-                color={profile.settings?.lineColor ?? theme.toolsPanel.mainColor}
+                color={profile.settings?.style?.lineColor ?? theme.toolsPanel.mainColor}
                 fontSize={theme.toolsPanel.iconSize}/>
         </ButtonDiv>
     </Tooltip>

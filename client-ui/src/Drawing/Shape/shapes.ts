@@ -9,6 +9,7 @@ import NewShapeProperties from "../Operation/NewShape/new-shape-settings";
 import {DrawingSettings} from "../Store/drawing-settings.store";
 import {DrawingDocument} from "../Store/drawing-document";
 import DrawingShapeBehaviorBase from "./drawing-shape-behavior-base";
+import {ColorNero} from "../../Common/css-colors";
 
 export enum SupportedShapes {
     None,
@@ -28,6 +29,24 @@ export interface DrawingContext extends DrawingContextDocument {
     settings: DrawingSettings
 }
 
+export interface DrawingShapeStyle {
+    lineColor: Nullable<string>;
+    fillColor: Nullable<string>;
+    fillStyle?: Nullable<string>;
+
+    lineWidth?: number;
+    lineType?: Nullable<string>;
+
+    lineStart?: Nullable<string>;
+    lineEnd?: Nullable<string>;
+}
+
+export const DefaultShapeStyle = {
+    lineColor: ColorNero,
+    lineWidth: 1,
+    fillColor: ""
+} as DrawingShapeStyle
+
 export interface DrawingShape {
     type: SupportedShapes;
     key: number;
@@ -38,14 +57,11 @@ export interface DrawingShape {
     end: Nullable<Point>;
 
     boundingRect: Nullable<Rect>;
-
-    color: Nullable<string>;
-    fillColor: Nullable<string>;
-    fillStyle?: Nullable<string>;
     label: Nullable<string>;
     rotate: Nullable<number>;
-    lineWidth?: number;
-    lineType?: Nullable<string>;
+
+    style: Nullable<DrawingShapeStyle>
+
 }
 
 

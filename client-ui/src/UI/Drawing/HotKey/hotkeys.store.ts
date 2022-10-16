@@ -135,7 +135,13 @@ const sliceAppHotKeys = createSlice({
                 }
 
                 if (!profile && action.payload.match('[0-9]')) {
-                    const selectedIndex = Number(action.payload)
+                    let selectedIndex = Number(action.payload)
+                    if (selectedIndex === 0) {
+                        selectedIndex = 10;
+                    } else {
+                        selectedIndex--;
+                    }
+
                     logger.log("toggleHotKeyProfile-selectedIndex", selectedIndex);
                     if (category && category.profiles && category.profiles.length > selectedIndex) {
                         profile = category.profiles[selectedIndex]
