@@ -2,7 +2,7 @@ import React from "react";
 import {logger} from "../../../Common/debug";
 import {Nullable} from "../../../Common/generics";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {ColorNero, ColorWhite} from "../../../Common/css-colors";
+import {ColorNero, ColorTransparentWhite, ColorWhite} from "../../../Common/css-colors";
 import {useTheme} from "styled-components";
 import ButtonDiv from "../Button/button-div";
 import {IconProp} from "@fortawesome/fontawesome-svg-core";
@@ -27,7 +27,7 @@ const ColorCellView: React.FC<ColorCellViewProps> = (props) => {
         icon = ['fal', 'circle-xmark'] as IconProp
     }
 
-    if (props.color === ColorWhite) {
+    if (props.color === ColorWhite || props.color === ColorTransparentWhite) {
         icon = ['fat', 'circle'] as IconProp
         color = ColorNero
     }

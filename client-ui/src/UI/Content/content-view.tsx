@@ -1,6 +1,6 @@
 import React, {useMemo} from "react";
 import {logger} from "../../Common/debug";
-import DrawingView from "../../Drawing/drawing-view";
+import DrawingView from "../Drawing/drawing-view";
 import {useSelector} from "react-redux";
 import appStore, {AppState} from "../../Store/App.store";
 import TextDocumentView from "../../Text/text-document-view";

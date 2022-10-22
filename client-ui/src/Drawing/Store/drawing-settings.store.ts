@@ -12,6 +12,8 @@ import {DrawingProfile} from "../Profile/profile";
 import {Nullable} from "../../Common/generics";
 import DefaultDrawProfiles from "../Profile/draw-profiles";
 import {logger} from "../../Common/debug";
+import {DrawingShapeStyleFeature} from "../Shape/shapes";
+import inDispatchDrawingSettings from "./drawing-settings-in-dispatch";
 
 export interface DrawingSettings {
     activeProfile: Nullable<string>,
@@ -43,6 +45,16 @@ const sliceDrawingSettings = createSlice({
                 logger.debug("drawingProfileSelect", action)
 
                 state.activeProfile = action.payload
+            },
+
+            drawingProfileUpdateStyle(state, action: PayloadAction<{
+                uid: string,
+                feature: DrawingShapeStyleFeature,
+                value: string
+            }>) {
+                logger.debug("drawingProfileUpdateStyle", action)
+
+                inDispatchDrawingSettings.changeProfileStyle(state, action.payload)
             },
 
             drawingOperationSelect(state, action: PayloadAction<SupportedOperations>) {

@@ -1,16 +1,16 @@
 import React, {TouchEventHandler, useEffect, useRef} from "react";
 import {useSelector} from "react-redux";
-import {AppState} from "../Store/App.store";
-import {withNullable} from "../Common/generics";
+import {AppState} from "../../Store/App.store";
+import {withNullable} from "../../Common/generics";
 import {getContext2D} from "./canvas";
 import styled, {DefaultTheme} from "styled-components";
-import {DrawingContext, DrawingShape, getShapeBehavior} from "./Shape/shapes";
-import Background from "./Painter/background";
-import getOperationHandler from "./Operation/operations";
-import Selection from "./Painter/selection";
-import {CssCursors} from "../Common/css-cursors";
-import {currentDrawingDocument} from "../UI/Content/Store/content.store.common";
-import {logger} from "../Common/debug";
+import {DrawingContext, DrawingShape, getShapeBehavior} from "../../Drawing/Shape/shapes";
+import Background from "../../Drawing/Painter/background";
+import getOperationHandler from "../../Drawing/Operation/operations";
+import Selection from "../../Drawing/Painter/selection";
+import {CssCursors} from "../../Common/css-cursors";
+import {currentDrawingDocument} from "../Content/Store/content.store.common";
+import {logger} from "../../Common/debug";
 
 interface CanvasWrapperProps {
     readonly width: number;

@@ -30,6 +30,18 @@ export interface DrawingContext extends DrawingContextDocument {
     settings: DrawingSettings
 }
 
+export enum DrawingShapeStyleFeature {
+    LineColor,
+    FillColor,
+    FillStyle,
+    LineWidth,
+    LineType,
+    LineStart,
+    LineEnd,
+    EraserStyle,
+    EraserWidth
+}
+
 export interface DrawingShapeStyle {
     lineColor: Nullable<string>;
     fillColor: Nullable<string>;
@@ -40,6 +52,9 @@ export interface DrawingShapeStyle {
 
     lineStart?: Nullable<string>;
     lineEnd?: Nullable<string>;
+
+    eraserStyle?: Nullable<string>;
+    eraserWidth?: Nullable<string>;
 }
 
 export const DefaultShapeStyle = {

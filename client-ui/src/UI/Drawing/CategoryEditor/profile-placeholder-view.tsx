@@ -6,7 +6,7 @@ import ButtonDiv from "../../Component/Button/button-div";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Tooltip} from "antd";
 import {useTheme} from "styled-components";
-import {ColorWhite} from "../../../Common/css-colors";
+import {ColorTransparentWhite, ColorWhite, ColorWhiteSmoke} from "../../../Common/css-colors";
 import {sliceActionsAppHotKeys} from "../HotKey/hotkeys.store";
 
 interface ProfilePlaceholderViewProps {
@@ -34,6 +34,11 @@ const ProfilePlaceholderView: React.FC<ProfilePlaceholderViewProps> = (props) =>
         dispatch(sliceActionsAppHotKeys.toggleHotKeyProfile(profile.uid));
     }
 
+    let color = profile.settings?.style?.lineColor ?? theme.toolsPanel.mainColor;
+    if (color === ColorWhite || color === ColorTransparentWhite) {
+        color = ColorWhiteSmoke
+    }
+
     return <Tooltip placement={"left"} title={profile.description} mouseEnterDelay={1}>
         <ButtonDiv
             width={theme.toolsPanel.size}
@@ -44,7 +49,7 @@ const ProfilePlaceholderView: React.FC<ProfilePlaceholderViewProps> = (props) =>
             focusedBackgroundColor={theme.toolsPanel.focusedBackgroundColor}>
             <FontAwesomeIcon
                 icon={profile?.icon ?? ['fal', 'question']}
-                color={profile.settings?.style?.lineColor ?? theme.toolsPanel.mainColor}
+                color={color}
                 fontSize={theme.toolsPanel.iconSize}/>
         </ButtonDiv>
     </Tooltip>

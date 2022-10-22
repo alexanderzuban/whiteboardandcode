@@ -51,6 +51,7 @@ export const ColorTransparentCeruleanBlue = "rgba(39, 112,203, 0.5)";
 export const ColorTransparentSlateGrey = "rgba(112, 128,144, 0.5)";
 export const ColorTransparentLightGrey = "rgba(211, 211,211, 0.5)";
 
+export const ColorTransparentWhite = "rgba(255, 255,255, 0.5)";
 export const ColorTransparentBlack = "rgba(31, 31,31, 0.5)";
 export const ColorTransparentOrange = "rgba(254, 212, 48, 0.5)";
 export const ColorTransparentDarkTangerine = "rgba(251, 174, 23, 0.5)";
@@ -87,3 +88,42 @@ export const ColorTransparentFaluRed = "rgba(112, 44, 22, 0.5)";
 export const ColorTransparentSangria = "rgba(159, 0, 0, 0.5)";
 export const ColorTransparentIslamicGreen = "rgba(0, 197, 0, 0.5)";
 export const ColorTransparentColdPurple = "rgba(152, 149, 190, 0.5)";
+
+
+export const DefaultPalette = [
+    ColorWhite,
+    ColorNero,
+    ColorOrange,
+    ColorDarkTangerine,
+    ColorPumpkin,
+    ColorCrimson,
+    ColorEggplant,
+    ColorMediumVioletRed,
+    ColorKingfisherDaisy,
+    ColorDeepLilac,
+    ColorMayaBlue,
+    ColorNavyBlue,
+    ColorCitrus,
+    ColorPigmentGreen,
+    ColorWhiteSmoke,
+    ColorSilver
+];
+
+export const DefaultTransparentPalette = [
+    ColorTransparentWhite,
+    ColorTransparentNero,
+    ColorTransparentOrange,
+    ColorTransparentDarkTangerine,
+    ColorTransparentPumpkin,
+    ColorTransparentCrimson,
+    ColorTransparentEggplant,
+    ColorTransparentMediumVioletRed,
+    ColorTransparentKingfisherDaisy,
+    ColorTransparentDeepLilac,
+    ColorTransparentMayaBlue,
+    ColorTransparentNavyBlue,
+    ColorTransparentCitrus,
+    ColorTransparentPigmentGreen,
+    ColorTransparentWhiteSmoke,
+    ColorTransparentSilver
+];

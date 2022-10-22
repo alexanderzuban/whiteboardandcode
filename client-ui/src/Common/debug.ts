@@ -7,7 +7,7 @@ class Logger {
 
     render(...data: any[]) {
         if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-            console.log({operation: "render", data})
+            console.log({operation: "render", component: data.length > 0 ? data[0] : "-", data})
         }
     }
 

@@ -90,8 +90,8 @@ const HotKeyButton: React.FC<HotKeyButtonProps> = (props) => {
         placement="rightTop"
         content={<CategoryEditorView category={props.category}/>}
         title={title}
-        visible={isDisplayConfig}
-        onVisibleChange={onDisplayConfigChanged}>
+        open={isDisplayConfig}
+        onOpenChange={onDisplayConfigChanged}>
         {tooltip}
     </Popover>;
 }

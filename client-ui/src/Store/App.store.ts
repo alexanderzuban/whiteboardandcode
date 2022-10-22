@@ -21,7 +21,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
     key: 'root',
     storage: createIdbStorage({
-        name: "wandc-db-02",
+        name: "wandc-db-04",
         version: 2,
         storeName: "state",
     }),

@@ -68,7 +68,7 @@ const Highlighter1 = {
         shape: SupportedShapes.Highlighter,
         style: {
             lineColor: ColorTransparentYellow,
-            lineWidth: 7
+            lineWidth: 10
         } as DrawingShapeStyle
     } as NewShapeSettings,
     icon: ["fas", "highlighter"],
@@ -84,7 +84,7 @@ const Highlighter2 = {
         shape: SupportedShapes.Highlighter,
         style: {
             lineColor: ColorTransparentBurntOrange,
-            lineWidth: 7
+            lineWidth: 10
         } as DrawingShapeStyle
     } as NewShapeSettings,
     icon: ["fas", "highlighter"],

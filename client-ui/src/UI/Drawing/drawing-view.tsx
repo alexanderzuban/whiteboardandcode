@@ -2,13 +2,13 @@ import React, {MouseEvent, TouchEvent, useState} from "react";
 import styled from "styled-components";
 import DrawingCanvas from "./drawing-canvas";
 import {useDispatch, useSelector} from "react-redux";
-import appStore, {AppState} from "../Store/App.store";
+import appStore, {AppState} from "../../Store/App.store";
 import {asPoint, touchAsPoint} from "./canvas";
-import {SupportedOperations} from "./Operation/operations";
-import {Point} from "../Common/point";
-import {DocumentType, sliceActionsContent} from "../UI/Content/Store/content.store";
-import {logger} from "../Common/debug";
-import {DrawingDocument} from "./Store/drawing-document";
+import {SupportedOperations} from "../../Drawing/Operation/operations";
+import {Point} from "../../Common/point";
+import {DocumentType, sliceActionsContent} from "../Content/Store/content.store";
+import {logger} from "../../Common/debug";
+import {DrawingDocument} from "../../Drawing/Store/drawing-document";
 
 
 const ViewportWrapper = styled.div`

@@ -1,6 +1,6 @@
-import {Nullable} from "../Common/generics";
+import {Nullable} from "../../Common/generics";
 import {MouseEvent, TouchEvent} from "react";
-import {Point} from "../Common/point";
+import {Point} from "../../Common/point";
 
 export function getContext2D(element: HTMLCanvasElement | null): Nullable<CanvasRenderingContext2D> {
     if (element) {
@@ -19,11 +19,11 @@ export function asPoint(origin: Point, event: MouseEvent<any>): Point {
 export function touchAsPoint(origin: Point, event: TouchEvent<HTMLElement>): Point {
     let offsetTop = 0;
     let offsetLeft = 0;
-    let target = event.nativeEvent.target as  HTMLElement;
+    let target = event.nativeEvent.target as HTMLElement;
 
-    while (target !== null && target !== undefined){
-        offsetTop+= target.offsetTop;
-        offsetLeft+= target.offsetLeft;
+    while (target !== null && target !== undefined) {
+        offsetTop += target.offsetTop;
+        offsetLeft += target.offsetLeft;
         target = target.offsetParent as HTMLElement;
     }
 
