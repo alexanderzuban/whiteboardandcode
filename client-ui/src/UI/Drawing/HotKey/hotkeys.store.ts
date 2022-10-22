@@ -142,11 +142,9 @@ const sliceAppHotKeys = createSlice({
                         selectedIndex--;
                     }
 
-                    logger.log("toggleHotKeyProfile-selectedIndex", selectedIndex);
                     if (category && category.profiles && category.profiles.length > selectedIndex) {
                         profile = category.profiles[selectedIndex]
                     }
-                    logger.log("toggleHotKeyProfile-selectedIndex", profile);
                 }
 
                 if (profile && category) {

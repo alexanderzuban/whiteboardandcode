@@ -15,6 +15,7 @@ interface HotKeyButtonProps {
 
 const TitleTemplate = styled.div`
   font-size: 12pt;
+  font-weight: bold;
   width: 100%;
   user-select: none;
 `

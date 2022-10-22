@@ -17,7 +17,8 @@ export enum SupportedShapes {
     Circle,
     Line,
     Freehand,
-    Polyline
+    Polyline,
+    Highlighter,
 }
 
 
@@ -113,7 +114,8 @@ const ShapesLookup = new Map<SupportedShapes, DrawingShapeBehavior>([
     [SupportedShapes.Line, new ShapeLineBehavior()],
     [SupportedShapes.Circle, new ShapeCircleBehavior()],
     [SupportedShapes.Polyline, new ShapePolylineBehavior()],
-    [SupportedShapes.Freehand, new ShapeFreehandBehavior()]
+    [SupportedShapes.Freehand, new ShapeFreehandBehavior()],
+    [SupportedShapes.Highlighter, new ShapeFreehandBehavior()]
 ]);
 
 export function getShapeBehavior(shapeType: SupportedShapes): DrawingShapeBehavior {

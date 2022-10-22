@@ -5,7 +5,7 @@ import NewShapeSettings from "../Operation/NewShape/new-shape-settings";
 
 export enum DrawingProfileType {
     None,
-    Pen,
+    Freehand,
     Highlighter,
     Eraser
 }

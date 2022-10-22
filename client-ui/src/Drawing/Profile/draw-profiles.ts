@@ -24,7 +24,7 @@ const Pen1 = {
         } as DrawingShapeStyle
     } as NewShapeSettings,
     icon: ["fas", "pen"],
-    type: DrawingProfileType.Pen,
+    type: DrawingProfileType.Freehand,
     uid: "pen-1"
 } as DrawingProfile;
 
@@ -40,7 +40,7 @@ const Pen2 = {
         } as DrawingShapeStyle
     } as NewShapeSettings,
     icon: ["fas", "pen"],
-    type: DrawingProfileType.Pen,
+    type: DrawingProfileType.Freehand,
     uid: "pen-2"
 } as DrawingProfile;
 
@@ -56,7 +56,7 @@ const Pen3 = {
         } as DrawingShapeStyle
     } as NewShapeSettings,
     icon: ["fas", "pen"],
-    type: DrawingProfileType.Pen,
+    type: DrawingProfileType.Freehand,
     uid: "pen-3"
 } as DrawingProfile;
 
@@ -65,7 +65,7 @@ const Highlighter1 = {
     name: "Highlighter",
     operation: {type: SupportedOperations.NewShape} as DrawingOperation,
     settings: {
-        shape: SupportedShapes.Freehand,
+        shape: SupportedShapes.Highlighter,
         style: {
             lineColor: ColorTransparentYellow,
             lineWidth: 7
@@ -81,7 +81,7 @@ const Highlighter2 = {
     name: "Highlighter",
     operation: {type: SupportedOperations.NewShape} as DrawingOperation,
     settings: {
-        shape: SupportedShapes.Freehand,
+        shape: SupportedShapes.Highlighter,
         style: {
             lineColor: ColorTransparentBurntOrange,
             lineWidth: 7

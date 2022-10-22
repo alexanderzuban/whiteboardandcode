@@ -11,6 +11,7 @@ import DrawingShapeBehaviorBase from "../drawing-shape-behavior-base";
 import {ShapeFreehandPainter} from "./shape-freehand-painter";
 import {Nullable} from "../../../Common/generics";
 import NewShapeSettings from "../../Operation/NewShape/new-shape-settings";
+import inDispatchDrawingSettings from "../../Store/drawing-settings-in-dispatch";
 
 export class ShapeFreehandBehavior extends DrawingShapeBehaviorBase {
     getSettings(shape: ShapeFreehand): DrawingShapeSettings {
@@ -27,7 +28,9 @@ export class ShapeFreehandBehavior extends DrawingShapeBehaviorBase {
     }
 
     newInstance(context: DrawingContext, start: Point): ShapeFreehand {
-        const shape = this.initialShape(context, start, SupportedShapes.Freehand, "Freehand") as ShapeFreehand;
+        let profile = inDispatchDrawingSettings.activeProfile(context.settings)
+        const shapeType = profile?.settings?.shape ?? SupportedShapes.Freehand;
+        const shape = this.initialShape(context, start, shapeType, "Freehand") as ShapeFreehand;
         this.pushPoint(shape, start)
 
         return shape;
@@ -55,7 +58,7 @@ export class ShapeFreehandBehavior extends DrawingShapeBehaviorBase {
     demoInstance(size: number, profile?: NewShapeSettings): ShapeFreehand {
         const start = {x: 2, y: size / 2};
         const shape =
-            this.demoShape(start, SupportedShapes.Freehand, "Freehand", profile) as ShapeFreehand;
+            this.demoShape(start, profile?.shape ?? SupportedShapes.Freehand, "Freehand", profile) as ShapeFreehand;
 
         this.extendTo(shape, null, {x: size / 3, y: size / 4 * 3});
         this.extendTo(shape, null, {x: size / 3 * 2, y: size / 4});

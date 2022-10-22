@@ -6,6 +6,7 @@ import {
     faBars,
     faChalkboardUser,
     faCirclePlus,
+    faCircleXmark,
     faCode,
     faEllipsisV,
     faEraser,
@@ -28,7 +29,9 @@ import {
     faEraser as fasEraser,
     faHighlighter as fasHighlighter,
     faPen as fasPen
-} from "@fortawesome/free-solid-svg-icons";
+} from "@fortawesome/pro-solid-svg-icons";
+
+import {faCircle as fatCircle,} from "@fortawesome/pro-thin-svg-icons";
 
 export function setupFontAwesome() {
     //solid
@@ -36,6 +39,9 @@ export function setupFontAwesome() {
         fasHighlighter,
         fasPen,
         fasEraser);
+
+    //thin
+    library.add(fatCircle);
 
 
     //light
@@ -46,6 +52,7 @@ export function setupFontAwesome() {
         faBars,
         faChalkboardUser,
         faCirclePlus,
+        faCircleXmark,
         faCode,
         faEllipsisV,
         faEraser,
