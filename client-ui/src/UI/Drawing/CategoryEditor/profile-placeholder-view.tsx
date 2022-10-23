@@ -3,15 +3,13 @@ import {logger} from "../../../Common/debug";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../../../Store/App.store";
 import ButtonDiv from "../../Component/Button/button-div";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Tooltip} from "antd";
 import {useTheme} from "styled-components";
-import {ColorTransparentWhite, ColorWhite, ColorWhiteSmoke} from "../../../Common/css-colors";
+import {ColorWhite} from "../../../Common/css-colors";
 import {sliceActionsAppHotKeys} from "../HotKey/hotkeys.store";
+import ProfilePlaceholderIconView from "./profile-placeholder-icon-view";
+import {ProfilePlaceholderViewProps} from "./profile-placeholder-view-props";
 
-interface ProfilePlaceholderViewProps {
-    profile: String
-}
 
 const ProfilePlaceholderView: React.FC<ProfilePlaceholderViewProps> = (props) => {
     logger.render("ProfilePlaceholderView")
@@ -21,7 +19,7 @@ const ProfilePlaceholderView: React.FC<ProfilePlaceholderViewProps> = (props) =>
 
     const profile = profiles.find(p => p.uid === props.profile)
     const theme = useTheme()
-
+    logger.debug("ProfilePlaceholderView", profile)
     if (!profile) {
         return <></>
     }
@@ -34,10 +32,6 @@ const ProfilePlaceholderView: React.FC<ProfilePlaceholderViewProps> = (props) =>
         dispatch(sliceActionsAppHotKeys.toggleHotKeyProfile(profile.uid));
     }
 
-    let color = profile.settings?.style?.lineColor ?? theme.toolsPanel.mainColor;
-    if (color === ColorWhite || color === ColorTransparentWhite) {
-        color = ColorWhiteSmoke
-    }
 
     return <Tooltip placement={"left"} title={profile.description} mouseEnterDelay={1}>
         <ButtonDiv
@@ -47,10 +41,7 @@ const ProfilePlaceholderView: React.FC<ProfilePlaceholderViewProps> = (props) =>
             onClick={clickHandler}
             border={"none"}
             focusedBackgroundColor={theme.toolsPanel.focusedBackgroundColor}>
-            <FontAwesomeIcon
-                icon={profile?.icon ?? ['fal', 'question']}
-                color={color}
-                fontSize={theme.toolsPanel.iconSize}/>
+            <ProfilePlaceholderIconView profile={props.profile}/>
         </ButtonDiv>
     </Tooltip>
 

@@ -10,7 +10,8 @@ export enum DrawingProfileType {
     None,
     Freehand,
     Highlighter,
-    Eraser
+    Eraser,
+    Shape,
 }
 
 export interface DrawingProfile {
@@ -36,16 +37,21 @@ export interface DrawingProfileBehaviour {
 
 export class DefaultDrawingProfileBehaviour implements DrawingProfileBehaviour {
 
-    Features = new Set<DrawingShapeStyleFeature>(
-        [
-            DrawingShapeStyleFeature.LineColor,
-            DrawingShapeStyleFeature.FillColor,
-            DrawingShapeStyleFeature.FillStyle,
-            DrawingShapeStyleFeature.LineWidth,
-            DrawingShapeStyleFeature.LineType,
-            DrawingShapeStyleFeature.LineStart,
-            DrawingShapeStyleFeature.LineEnd
-        ]);
+    Features: Set<DrawingShapeStyleFeature>;
+
+    constructor() {
+        this.Features = new Set<DrawingShapeStyleFeature>(
+            [
+                DrawingShapeStyleFeature.LineColor,
+                DrawingShapeStyleFeature.FillColor,
+                DrawingShapeStyleFeature.FillStyle,
+                DrawingShapeStyleFeature.LineWidth,
+                DrawingShapeStyleFeature.LineType,
+                DrawingShapeStyleFeature.LineStart,
+                DrawingShapeStyleFeature.LineEnd
+            ]);
+    }
+
 
     isSupport(profile: DrawingProfile, feature: DrawingShapeStyleFeature): boolean {
         return this.Features.has(feature)

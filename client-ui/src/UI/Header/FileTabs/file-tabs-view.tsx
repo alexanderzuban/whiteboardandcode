@@ -38,8 +38,16 @@ const FileTabsView: React.FC = (props) => {
             mouse.nativeEvent.preventDefault();
         }
     };
-
-    const {TabPane} = Tabs;
+ 
+    const items = files.map(file => (
+        {
+            key: file.uid,
+            active: file.uid === selected,
+            closable: totalFiles > 1,
+            closeIcon: <FileTabCloseView file={file}/>,
+            label: <FileTabPaneView file={file}/>
+        }
+    ))
 
     return <TabsDiv>
         <Tabs
@@ -49,18 +57,8 @@ const FileTabsView: React.FC = (props) => {
             tabBarExtraContent={<FileTabsMenuButton/>}
             onChange={onChangeHandler}
             onTabClick={onTabClickHandler}
-            type="editable-card">
-            {
-                files.map(file => (
-
-                    <TabPane
-                        active={file.uid === selected}
-                        tab={<FileTabPaneView file={file}/>}
-                        closeIcon={<FileTabCloseView file={file}/>}
-                        key={file.uid} closable={totalFiles > 1}/>
-                ))
-            }
-        </Tabs>
+            type="editable-card"
+            items={items}/>
     </TabsDiv>;
 }
 

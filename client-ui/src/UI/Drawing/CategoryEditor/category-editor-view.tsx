@@ -20,7 +20,7 @@ const CategoryEditorView: React.FC<CategoryEditorViewProps> = (props) => {
 
     if (!category)
         return <></>
-
+  
     return <>
         <Row justify="space-between">
             {

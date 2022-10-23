@@ -3,6 +3,7 @@ import {
     DrawingContextDocument,
     DrawingShapePainter,
     DrawingShapeSettings,
+    DrawingShapeStyleFeature,
     SupportedShapes
 } from "../shapes";
 import {Point} from "../../../Common/point";
@@ -65,5 +66,15 @@ export class ShapeFreehandBehavior extends DrawingShapeBehaviorBase {
         this.complete(shape, null, {x: size - 4, y: size / 2}, true)
 
         return shape;
+    }
+
+    supportedStyleFeatures(): DrawingShapeStyleFeature[] {
+        return [
+            DrawingShapeStyleFeature.LineType,
+            DrawingShapeStyleFeature.LineColor,
+            DrawingShapeStyleFeature.LineWidth,
+            DrawingShapeStyleFeature.LineStart,
+            DrawingShapeStyleFeature.LineEnd
+        ]
     }
 }

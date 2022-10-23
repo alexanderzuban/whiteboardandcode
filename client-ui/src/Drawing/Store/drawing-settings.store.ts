@@ -41,6 +41,14 @@ const sliceDrawingSettings = createSlice({
             setBackgroundGridSize,
             setBackgroundColor,
 
+            registerDrawingProfile(state, action: PayloadAction<{ profile: DrawingProfile }>) {
+                logger.debug("drawingProfileSelect", action)
+
+                if (!state.drawingProfiles.find(p => p.uid === action.payload.profile.uid)) {
+                    state.drawingProfiles.push(action.payload.profile)
+                }
+            },
+
             drawingProfileSelect(state, action: PayloadAction<string>) {
                 logger.debug("drawingProfileSelect", action)
 

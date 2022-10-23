@@ -7,7 +7,9 @@ export default abstract class DrawigShapePainterBase implements DrawingShapePain
 
     protected setupFromShape(context2d: CanvasRenderingContext2D, shape: DrawingShape) {
         context2d.lineWidth = shape.style?.lineWidth ?? 1;
-        context2d.strokeStyle = shape.style?.lineColor ?? "black";
+        if (shape.style?.lineColor !== "") {
+            context2d.strokeStyle = shape.style?.lineColor ?? "black";
+        }
     }
 
     protected startPath(context2d: CanvasRenderingContext2D) {
@@ -22,7 +24,7 @@ export default abstract class DrawigShapePainterBase implements DrawingShapePain
     }
 
     protected fillShape(shape: DrawingShape, context2d: CanvasRenderingContext2D) {
-        if (shape.style?.fillColor) {
+        if (shape.style?.fillColor && shape.style?.fillColor !== "") {
             context2d.fillStyle = shape.style?.fillColor;
             context2d.fill();
         }

@@ -8,9 +8,11 @@ export function withNullable<T>(element: Nullable<T> | undefined, whenDefined: (
     }
 }
 
-export function fromNullable<T, C>(element: Nullable<T>, getter: (param: T) => C): Nullable<C> {
+export function fromNullable<T, C>(element: Nullable<T>, getter: (param: T) => C, orElse?: () => C): Nullable<C> {
     if (element !== undefined && element !== null) {
         return getter(element)
+    } else if (orElse) {
+        return orElse();
     }
     return null
 }

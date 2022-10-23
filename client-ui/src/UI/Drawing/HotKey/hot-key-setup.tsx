@@ -5,6 +5,8 @@ import {HotKeyCategory, sliceActionsAppHotKeys, SupportedHotKeyCategories} from 
 import {logger} from "../../../Common/debug";
 import DefaultDrawProfiles from "../../../Drawing/Profile/draw-profiles";
 import {DrawingProfile} from "../../../Drawing/Profile/profile";
+import DefaultShapeProfiles from "../../../Drawing/Profile/shape-profiles";
+import {sliceActionsDrawingSettings} from "../../../Drawing/Store/drawing-settings.store";
 
 
 const HotKeySetup: React.FC = (props) => {
@@ -18,6 +20,7 @@ const HotKeySetup: React.FC = (props) => {
     useEffect(() => {
         function installProfile(category: HotKeyCategory, profile: DrawingProfile) {
             dispatch(sliceActionsAppHotKeys.registerHotKeyProfile({category: category.key, profile}))
+            dispatch(sliceActionsDrawingSettings.registerDrawingProfile({profile}))
         }
 
         function lookupCategory(key: SupportedHotKeyCategories) {
@@ -27,6 +30,11 @@ const HotKeySetup: React.FC = (props) => {
         const categoryDraw = lookupCategory(SupportedHotKeyCategories.Draw);
         if (categoryDraw && (categoryDraw.profiles?.length ?? 0) === 0) {
             DefaultDrawProfiles.forEach(profile => installProfile(categoryDraw, profile));
+        }
+
+        const categoryShape = lookupCategory(SupportedHotKeyCategories.Shape);
+        if (categoryShape && (categoryShape.profiles?.length ?? 0) === 0) {
+            DefaultShapeProfiles.forEach(profile => installProfile(categoryShape, profile));
         }
 
 

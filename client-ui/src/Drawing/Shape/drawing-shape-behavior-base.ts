@@ -6,6 +6,7 @@ import {
     DrawingShapeBehavior,
     DrawingShapePainter,
     DrawingShapeSettings,
+    DrawingShapeStyleFeature,
     getShapeBehavior,
     SupportedShapes
 } from "./shapes";
@@ -38,7 +39,7 @@ export default class DrawingShapeBehaviorBase implements DrawingShapeBehavior {
             } as Rect,
 
             style: Object.assign({}, DefaultShapeStyle, profile?.settings?.style),
-            
+
             points: [],
             label: null,
             rotate: null
@@ -69,7 +70,7 @@ export default class DrawingShapeBehaviorBase implements DrawingShapeBehavior {
                 bottomRight: start
             } as Rect,
 
-            style: Object.assign({}, DefaultShapeStyle, profile?.style),
+            style: Object.assign({}, DefaultShapeStyle, profile?.style, {lineWidth: 2}),
 
             points: [],
             label: null,
@@ -249,4 +250,15 @@ export default class DrawingShapeBehaviorBase implements DrawingShapeBehavior {
         }
 
     }
+
+    supportedStyleFeatures(): DrawingShapeStyleFeature[] {
+        return [
+            DrawingShapeStyleFeature.LineType,
+            DrawingShapeStyleFeature.LineColor,
+            DrawingShapeStyleFeature.LineWidth,
+            DrawingShapeStyleFeature.FillColor,
+            DrawingShapeStyleFeature.FillStyle
+        ]
+    }
+
 }

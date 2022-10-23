@@ -2,6 +2,7 @@ import {
     DrawingContext,
     DrawingContextDocument,
     DrawingShapePainter,
+    DrawingShapeStyleFeature,
     getShapeBehavior,
     SupportedShapes
 } from "../shapes";
@@ -49,5 +50,15 @@ export class ShapePolylineBehavior extends DrawingShapeBehaviorBase {
         this.complete(shape, null, {x: size - 4, y: size / 2}, false)
 
         return shape;
+    }
+
+    supportedStyleFeatures(): DrawingShapeStyleFeature[] {
+        return [
+            DrawingShapeStyleFeature.LineType,
+            DrawingShapeStyleFeature.LineColor,
+            DrawingShapeStyleFeature.LineWidth,
+            DrawingShapeStyleFeature.LineStart,
+            DrawingShapeStyleFeature.LineEnd
+        ]
     }
 }

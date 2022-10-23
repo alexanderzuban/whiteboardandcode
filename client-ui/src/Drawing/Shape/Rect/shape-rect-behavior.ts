@@ -1,4 +1,4 @@
-import {DrawingContext, DrawingShapePainter, SupportedShapes} from "../shapes";
+import {DrawingContext, DrawingShapePainter, DrawingShapeStyleFeature, SupportedShapes} from "../shapes";
 import {ShapeRectPainter} from "./shape-rect-painter";
 import {Point} from "../../../Common/point";
 import {ShapeRect} from "./shape-rect";
@@ -23,5 +23,15 @@ export class ShapeRectBehavior extends DrawingShapeBehaviorBase {
         this.extendTo(shape, null, {x: size - 4, y: size - 4});
 
         return shape;
+    }
+
+    supportedStyleFeatures(): DrawingShapeStyleFeature[] {
+        return [
+            DrawingShapeStyleFeature.LineType,
+            DrawingShapeStyleFeature.LineColor,
+            DrawingShapeStyleFeature.LineWidth,
+            DrawingShapeStyleFeature.FillColor,
+            DrawingShapeStyleFeature.FillStyle
+        ]
     }
 }

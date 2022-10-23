@@ -1,4 +1,4 @@
-import {DrawingContext, DrawingShapePainter, SupportedShapes} from "../shapes";
+import {DrawingContext, DrawingShapePainter, DrawingShapeStyleFeature, SupportedShapes} from "../shapes";
 import {Point} from "../../../Common/point";
 import {ShapeCirclePainter} from "./shape-circle-painter";
 import {ShapeCircle} from "./shape-circle";
@@ -22,5 +22,15 @@ export class ShapeCircleBehavior extends DrawingShapeBehaviorBase {
         this.extendTo(shape, null, {x: size - 4, y: size - 4});
 
         return shape;
+    }
+
+    supportedStyleFeatures(): DrawingShapeStyleFeature[] {
+        return [
+            DrawingShapeStyleFeature.LineType,
+            DrawingShapeStyleFeature.LineColor,
+            DrawingShapeStyleFeature.LineWidth,
+            DrawingShapeStyleFeature.FillStyle,
+            DrawingShapeStyleFeature.FillColor
+        ]
     }
 }

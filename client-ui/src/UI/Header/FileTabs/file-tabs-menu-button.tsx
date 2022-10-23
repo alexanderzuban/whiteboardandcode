@@ -10,8 +10,8 @@ const FileTabsMenuButton: React.FC = (props) => {
     const [isTooltipVisible, setTooltipVisible] = useState(false)
     const menu = useFileMenu()
 
-    const dropdownVisibilityChangeHandler = (visible: boolean) => {
-        if (visible) {
+    const dropdownVisibilityChangeHandler = (open: boolean) => {
+        if (open) {
             setTooltipVisible(false)
         }
     }
@@ -19,11 +19,11 @@ const FileTabsMenuButton: React.FC = (props) => {
     return <Tooltip
         placement={"bottom"}
         title={"Selected File Options"}
-        visible={isTooltipVisible}>
+        open={isTooltipVisible}>
         <Dropdown
             overlay={menu}
             trigger={['click']}
-            onVisibleChange={dropdownVisibilityChangeHandler}>
+            onOpenChange={dropdownVisibilityChangeHandler}>
             <ButtonDiv>
                 <FontAwesomeIcon icon={['fal', 'ellipsis-v']} fontSize={16}/>
             </ButtonDiv>

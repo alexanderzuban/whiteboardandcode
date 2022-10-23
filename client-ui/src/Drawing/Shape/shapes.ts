@@ -107,7 +107,8 @@ export interface DrawingShapeBehavior {
     isShapeTouchOrOverlap(shape: DrawingShape, ...points: Point[]): boolean;
 
     shapeProfile(shape: DrawingShape): NewShapeProperties;
-
+ 
+    supportedStyleFeatures(): DrawingShapeStyleFeature[];
 
     getPointsCount(shape: DrawingShape): number
 
