@@ -12,6 +12,7 @@ export interface OperationSelect extends DrawingOperation {
     end: Point;
     reset: boolean;
     moved: boolean;
+    edit: boolean;
 }
 
 

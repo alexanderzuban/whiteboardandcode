@@ -50,6 +50,20 @@ class DrawingDocumentInDispatch {
         document.shapes.push(shape)
         this.recordChange(document, DrawingShapeChangeType.Added, shape.key)
     }
+
+    cloneSelectedShapes(document: DrawingDocument) {
+        const lookup = new Set<number>(document.selectedShapes.keys)
+        const selected = document.shapes.filter(s => lookup.has(s.key))
+        const copy = selected.map(s => {
+            document.sequence++
+            const key = document.sequence
+            const copy = Object.assign({}, JSON.parse(JSON.stringify(s)), {key})
+            this.appendShape(document, copy)
+            return key
+        })
+        inDispatchSelectedShapes.selectedClear(document)
+        inDispatchSelectedShapes.selectedAppend(document, copy)
+    }
 }
 
 

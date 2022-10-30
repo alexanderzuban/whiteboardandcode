@@ -33,6 +33,7 @@ export interface ContentDocument {
     readonly type: DocumentType,
     readonly uid: string,
     unsaved: boolean
+    sequence: number
 }
 
 export interface ContentState {

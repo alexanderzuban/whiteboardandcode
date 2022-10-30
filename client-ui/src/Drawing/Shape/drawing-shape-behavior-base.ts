@@ -21,8 +21,8 @@ import NewShapeSettings from "../Operation/NewShape/new-shape-settings";
 export default class DrawingShapeBehaviorBase implements DrawingShapeBehavior {
 
     protected initialShape(context: DrawingContext, start: Nullable<Point>, type: SupportedShapes, name: string): DrawingShape {
-
-        const key = Date.now();
+        context.document.sequence++
+        const key = context.document.sequence
         const profile = inDispatchDrawingSettings.activeProfile(context.settings)
 
         return {

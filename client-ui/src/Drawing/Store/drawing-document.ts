@@ -50,7 +50,8 @@ export function newDrawingInstance(): DrawingDocument {
         operation: null,
         origin: {x: 0, y: 0},
         changes: [],
-        unsaved: true
+        unsaved: true,
+        sequence: 10
     } as DrawingDocument
 }
 

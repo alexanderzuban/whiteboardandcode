@@ -63,7 +63,7 @@ const DrawingView: React.FC = (props) => {
 
         if (event.ctrlKey) {
             const ctrlOperation = drawing.selectedShapes.keys.length === 0
-                ? SupportedOperations.Pan : SupportedOperations.Translate;
+                ? SupportedOperations.Pan : SupportedOperations.CopyTranslate;
 
             startOperation(ctrlOperation);
             return;

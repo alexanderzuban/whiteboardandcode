@@ -9,6 +9,7 @@ import {OperationEraseHandler} from "./Erase/operation-erase";
 import {DrawingContext} from "../Shape/shapes";
 import {CssCursors} from "../../Common/css-cursors";
 import {OperationNoneHandler} from "./None/operation-none";
+import {OperationCopyTranslateHandler} from "./CopyTranslate/operation-copy-translate";
 
 
 export enum SupportedOperations {
@@ -17,6 +18,7 @@ export enum SupportedOperations {
     NewShape,
     Select,
     Translate,
+    CopyTranslate,
     Scale,
     Hover,
     Erase
@@ -56,6 +58,7 @@ const OperationsLookup = new Map<SupportedOperations, DrawingOperationHandler>([
     [SupportedOperations.NewShape, new OperationNewShapeHandler()],
     [SupportedOperations.Select, new OperationSelectHandler()],
     [SupportedOperations.Translate, new OperationTranslateHandler()],
+    [SupportedOperations.CopyTranslate, new OperationCopyTranslateHandler()],
     [SupportedOperations.Hover, new OperationHoverHandler()],
     [SupportedOperations.Erase, new OperationEraseHandler()],
 ]);
