@@ -8,12 +8,14 @@ import HotKeyDispatcher from "../Drawing/HotKey/hot-key-dispatcher";
 import HotKeyPanel from "../Drawing/HotKey/hot-key-panel";
 import DrawingKeyboardListener from "../Drawing/drawing-keyboard-listener";
 import {DocumentType} from "./Store/content.store";
+import SelectionDocumentView from "../Drawing/SelectionEditor/selection-document-view";
 
 const ContentView: React.FC = () => {
     logger.render("ContentView");
 
     const drawing = useMemo(() => <>
         <DrawingView/>
+        <SelectionDocumentView/>
     </>, [])
 
     const text = useMemo(() => <TextDocumentView/>, [])

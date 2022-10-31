@@ -25,5 +25,26 @@ export const GlobalStyle = createGlobalStyle`
   div.ant-tabs {
     user-select: none;
   }
+  
+  h1.ant-typography {
+    user-select: none;
+  }
+
+  h2.ant-typography {
+    user-select: none;
+  }
+
+  h3.ant-typography {
+    user-select: none;
+  }
+
+  h4.ant-typography {
+    user-select: none;
+  }
+
+  h5.ant-typography {
+    user-select: none;
+  }
+
 
 `;

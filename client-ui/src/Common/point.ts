@@ -21,6 +21,20 @@ export interface Rect {
     bottomRight: Point
 }
 
+export function rectWidth(rect: Nullable<Rect>): number {
+    if (rect) {
+        return Math.abs(rect.bottomRight.x - rect.topLeft.x)
+    }
+    return 0
+}
+
+export function rectHeight(rect: Nullable<Rect>): number {
+    if (rect) {
+        return Math.abs(rect.bottomRight.y - rect.topLeft.y)
+    }
+    return 0
+}
+
 export function calcMinMax(...points: Nullable<Point>[]) {
     if (points && points.length > 0) {
 

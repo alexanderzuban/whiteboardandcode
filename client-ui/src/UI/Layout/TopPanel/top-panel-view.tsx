@@ -22,7 +22,8 @@ const TopPanelView: React.FC<ViewProps> = (props) => {
         backgroundColor={theme.navigationPanel.backgroundColor}
         borderBottom={`${theme.navigationPanel.borderColor} solid ${theme.navigationPanel.borderWidth}px`}
         left={0}
-        top={0}>
+        top={0}
+        style={{zIndex: 2000}}>
         <Row gutter={[2, 2]} wrap={false}>
             <Col>
                 <ActionsView/>
