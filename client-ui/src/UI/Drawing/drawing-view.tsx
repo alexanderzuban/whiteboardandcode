@@ -44,6 +44,8 @@ const DrawingView: React.FC = (props) => {
         logger.debug("processStart", settings.selectedOperation, drawing.operation)
 
         if (drawing.operation) {
+            logger.debug("resumeOperation", drawing.operation)
+
             dispatch(sliceActionsContent.drawingOperationResume({
                 data: point,
                 settings: appStore.getState().drawingSettings
@@ -53,6 +55,7 @@ const DrawingView: React.FC = (props) => {
 
         function startOperation(operation: SupportedOperations) {
             logger.debug("startOperation", operation)
+
             dispatch(sliceActionsContent.drawingOperationStart({
                 operation,
                 data: point,
@@ -77,6 +80,7 @@ const DrawingView: React.FC = (props) => {
         if (event.shiftKey) {
             //start and resume select operation, to avoid reset current selection
             startOperation(SupportedOperations.Select)
+
             dispatch(sliceActionsContent.drawingOperationResume({
                 data: point,
                 settings: appStore.getState().drawingSettings
@@ -94,7 +98,7 @@ const DrawingView: React.FC = (props) => {
 
         const point = asPoint(drawing.origin, event);
 
-        logger.log("mouseDown", point, drawing?.operation, settings.selectedOperation)
+        logger.debug("mouseDown", point, drawing?.operation, settings.selectedOperation)
         processStart(point, event)
     }
 
@@ -102,6 +106,7 @@ const DrawingView: React.FC = (props) => {
         if (!drawing || !drawing.operation) return;
         const point = asPoint(drawing.origin, event);
 
+        logger.debug("mouseMove", point)
         dispatch(sliceActionsContent.drawingOperationUpdate({
             settings: appStore.getState().drawingSettings,
             data: point
@@ -112,7 +117,7 @@ const DrawingView: React.FC = (props) => {
         if (!drawing || !drawing.operation) return;
         const point = asPoint(drawing.origin, event);
 
-        logger.log("mouseUp", point)
+        logger.debug("mouseUp", point)
         dispatch(sliceActionsContent.drawingOperationComplete({
             settings: appStore.getState().drawingSettings,
             data: point
@@ -122,14 +127,15 @@ const DrawingView: React.FC = (props) => {
     function click(event: MouseEvent<HTMLDivElement>) {
         if (!drawing) return;
         const point = asPoint(drawing.origin, event);
-        logger.log("click", point)
+
+        logger.debug("click", point)
     }
 
 
     function touchStart(event: TouchEvent<HTMLDivElement>) {
         if (!drawing) return;
         const point = touchAsPoint(drawing.origin, event);
-        logger.log("touchStart", point)
+        logger.debug("touchStart", point)
         setTouchPoint(point)
         processStart(point, Object.assign({}, event, {button: 0}))
     }
@@ -137,6 +143,7 @@ const DrawingView: React.FC = (props) => {
     function touchMove(event: TouchEvent<HTMLDivElement>) {
         if (!drawing) return;
         const point = touchAsPoint(drawing.origin, event);
+        logger.debug("touchMove", point)
         setTouchPoint(point)
         dispatch(sliceActionsContent.drawingOperationUpdate({
             settings: appStore.getState().drawingSettings,
@@ -145,7 +152,7 @@ const DrawingView: React.FC = (props) => {
     }
 
     function touchEnd(event: TouchEvent<HTMLDivElement>) {
-        logger.log("touchEnd", touchPoint)
+        logger.debug("touchEnd", touchPoint)
         dispatch(sliceActionsContent.drawingOperationComplete({
             settings: appStore.getState().drawingSettings,
             data: touchPoint
@@ -154,7 +161,7 @@ const DrawingView: React.FC = (props) => {
 
 
     function touchCancel(event: TouchEvent<HTMLDivElement>) {
-        logger.log("touchCancel", touchPoint)
+        logger.debug("touchCancel", touchPoint)
         dispatch(sliceActionsContent.drawingOperationComplete({
             settings: appStore.getState().drawingSettings,
             data: touchPoint
