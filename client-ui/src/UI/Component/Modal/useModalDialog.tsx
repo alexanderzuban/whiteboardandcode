@@ -35,7 +35,7 @@ export function useModalDialog(
         (isDisplayModal) ?
             <Modal
                 title={title}
-                visible={true}
+                open={true}
                 onOk={hide}
                 onCancel={hide}>
                 {content({hide})}

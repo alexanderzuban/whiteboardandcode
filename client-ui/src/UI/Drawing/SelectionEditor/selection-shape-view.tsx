@@ -3,6 +3,7 @@ import {DrawingDocument} from "../../../Drawing/Store/drawing-document";
 import styled, {useTheme} from "styled-components";
 import {rectHeight, rectWidth} from "../../../Common/point";
 import {logger} from "../../../Common/debug";
+import SelectionResizeBulletView from "./selection-resize-bullet-view";
 
 interface SelectionShapeViewProps {
     document: DrawingDocument
@@ -30,6 +31,13 @@ const SelectionDiv = styled.div<SelectionWrapperProps>`
   z-index: 800;
 `;
 
+const SelectionShapeViewInitialState =    {
+    hasSelection: false,
+    width: 0,
+    height: 0,
+    top: 0,
+    left: 0,
+} as SelectionShapeViewState
 
 const SelectionShapeView: React.FC<SelectionShapeViewProps> = (props) => {
     logger.render("SelectionShapeView");
@@ -38,17 +46,10 @@ const SelectionShapeView: React.FC<SelectionShapeViewProps> = (props) => {
     const topPanelSize = theme.navigationPanel.size + theme.navigationPanel.borderWidth
 
 
-    const [state, setState] = useState(
-        {
-            hasSelection: false,
-            width: 0,
-            height: 0,
-            top: 0,
-            left: 0,
-        } as SelectionShapeViewState)
+    const [state, setState] = useState(SelectionShapeViewInitialState)
 
     useEffect(() => {
-        const stateUpdate = Object.assign({}, state)
+        const stateUpdate = Object.assign({}, SelectionShapeViewInitialState)
         if (props.document.selectedShapes.keys.length === 0) {
             stateUpdate.hasSelection = false
         } else {
@@ -69,23 +70,30 @@ const SelectionShapeView: React.FC<SelectionShapeViewProps> = (props) => {
         props.document,
         props.document.selectedShapes.keys,
         props.document.selectedShapes.boundingRect,
-        topPanelSize])
-
-    const view = useMemo(() => <SelectionDiv
-
-        style={{
-            width: `${state.width + 32}px`,
-            height: `${state.height + 32}px`,
-            top: `${state.top - 16}px`,
-            left: `${state.left - 16}px`,
-        }}
-    />, [state]);
+        topPanelSize ])
 
     if (!state.hasSelection) return <></>
-
+    const top = state.top-16
+    const left = state.left-16
+    const bottom = top+state.height+16
+    const right = left+state.width+16
 
     return <>
-        {view}
+
+        <SelectionDiv
+            style={{
+                width: `${state.width + 32}px`,
+                height: `${state.height + 32}px`,
+                top: `${state.top - 16}px`,
+                left: `${state.left - 16}px`,
+            }}
+        />
+        <SelectionResizeBulletView top={top} left={left}/>
+        <SelectionResizeBulletView top={top} left={right}/>
+        <SelectionResizeBulletView top={bottom} left={left}/>
+        <SelectionResizeBulletView top={bottom} left={right}/>
+
+
     </>
 }
 

@@ -17,13 +17,15 @@ const TopPanelView: React.FC<ViewProps> = (props) => {
     const theme = useTheme()
 
     return <Panel
-        height={theme.navigationPanel.size}
-        width={size.width}
+        style={{
+            zIndex: 2000,
+            width:`${size.width}px`,
+            height:`${theme.navigationPanel.size}px`,
+            left:`0px`,
+            top:`0px`
+        }}
         backgroundColor={theme.navigationPanel.backgroundColor}
-        borderBottom={`${theme.navigationPanel.borderColor} solid ${theme.navigationPanel.borderWidth}px`}
-        left={0}
-        top={0}
-        style={{zIndex: 2000}}>
+        borderBottom={`${theme.navigationPanel.borderColor} solid ${theme.navigationPanel.borderWidth}px`}>
         <Row gutter={[2, 2]} wrap={false}>
             <Col>
                 <ActionsView/>

@@ -32,11 +32,13 @@ const CenterPanelView: React.FC<ViewProps> = (props) => {
 
 
     return <Panel
-        height={viewportHeight}
-        width={size.width}
-        backgroundColor={"white"}
-        left={viewportLeft}
-        top={viewportTop}>
+        style={{
+            width:`${size.width}px`,
+            height:`${viewportHeight}px`,
+            left:`${viewportLeft}px`,
+            top:`${viewportTop}px`
+        }}
+        backgroundColor={"white"}>
         {props.children}
     </Panel>;
 }
