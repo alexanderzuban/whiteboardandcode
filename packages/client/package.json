@@ -1,8 +1,9 @@
 {
-  "name": "whiteboardandcode",
+  "name": "@whiteboardandcode/client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@whiteboardandcode/shared": "workspace:*",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/pro-duotone-svg-icons": "^6.1.1",
     "@fortawesome/pro-light-svg-icons": "^6.1.1",

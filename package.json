@@ -1,0 +1,29 @@
+{
+  "name": "whiteboardandcode",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=@whiteboardandcode/client",
+    "dev:server": "npm run dev --workspace=@whiteboardandcode/server",
+    "dev:all": "concurrently \"npm run dev\" \"npm run dev:server\"",
+    "build": "npm run build --workspaces",
+    "build:client": "npm run build --workspace=@whiteboardandcode/client",
+    "build:server": "npm run build --workspace=@whiteboardandcode/server",
+    "build:shared": "npm run build --workspace=@whiteboardandcode/shared",
+    "build:infra": "npm run build --workspace=@whiteboardandcode/infrastructure",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "deploy:dev": "npm run deploy:dev --workspace=@whiteboardandcode/infrastructure",
+    "deploy:prod": "npm run deploy:prod --workspace=@whiteboardandcode/infrastructure",
+    "clean": "rm -rf packages/*/dist packages/*/node_modules node_modules"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
