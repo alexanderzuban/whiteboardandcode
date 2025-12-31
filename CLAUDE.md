@@ -88,3 +88,47 @@ npm test          # Run tests
 - Canvas-based rendering for drawing shapes
 - Hot keys configurable through the UI
 - Multiple document types supported: Drawing and Text (code editor)
+
+## Knowledge Base
+
+The `/knowledge` folder contains project documentation that MUST be maintained:
+
+```
+knowledge/
+├── documentation/    # Requirements and specifications
+├── features/         # Feature documentation, architecture, APIs
+└── history/          # Prompt history organized by date
+```
+
+### MANDATORY: After Every Change
+
+After completing any task that modifies the codebase, Claude MUST:
+
+1. **Update Feature Documentation** (`knowledge/features/`)
+   - If a new feature was added, create a new documentation file
+   - If an existing feature was modified, update the relevant documentation
+   - Document architecture, APIs, and usage examples
+
+2. **Update Requirements** (`knowledge/documentation/requirements.md`)
+   - Add new requirements if functionality was added
+   - Mark requirements as implemented if completed
+
+3. **Log the Prompt** (`knowledge/history/YYYY-MM-DD.md`)
+   - Add the user's prompt to today's history file
+   - Create the file if it doesn't exist
+   - Include a brief summary of what was done
+
+### Documentation Standards
+
+- Use Markdown format for all documentation
+- Include code examples where applicable
+- Reference source file paths for key implementations
+- Keep documentation concise but comprehensive
+
+### Review Checklist
+
+Before completing a session, verify:
+- [ ] All new/modified features are documented
+- [ ] Today's prompts are logged in history
+- [ ] Requirements reflect current functionality
+- [ ] No stale documentation references removed code

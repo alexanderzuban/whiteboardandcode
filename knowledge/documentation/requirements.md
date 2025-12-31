@@ -1,0 +1,88 @@
+# Project Requirements
+
+## Overview
+
+WhiteboardAndCode is a web-based application that combines a digital whiteboard with a code editor, enabling users to sketch ideas and write code in a unified workspace.
+
+## Functional Requirements
+
+### Drawing Canvas
+
+1. **Shape Drawing**
+   - Users can draw basic shapes: rectangles, circles, lines, polylines
+   - Users can draw freehand sketches
+   - Support for different line widths and colors
+   - Fill color support for closed shapes
+
+2. **Drawing Tools**
+   - Freehand drawing tool
+   - Highlighter tool (semi-transparent strokes)
+   - Eraser tool
+   - Shape tools (rectangle, circle, line, polyline)
+
+3. **Canvas Operations**
+   - Pan/scroll the canvas
+   - Select shapes (single and multi-select)
+   - Move/translate selected shapes
+   - Copy and duplicate shapes
+   - Delete shapes
+   - Hover highlighting
+
+4. **Selection Features**
+   - Bounding box display for selected shapes
+   - Resize handles for selected shapes
+   - Multi-shape selection support
+
+### Code Editor
+
+1. **Monaco Editor Integration**
+   - Syntax highlighting for multiple languages
+   - Language selection dialog
+   - Standard code editing features
+
+2. **Document Management**
+   - Create new text/code documents
+   - Switch between documents
+
+### User Interface
+
+1. **Tool Panels**
+   - Drawing tool category selector
+   - Profile editor (color, line width)
+   - Hot key configuration
+
+2. **Document Management**
+   - Tab-based document switching
+   - Document naming
+
+### Data Persistence
+
+1. **Local Storage**
+   - All data persisted to IndexedDB
+   - Automatic state persistence
+   - No backend required for basic operation
+
+## Non-Functional Requirements
+
+### Performance
+- Smooth drawing experience (60fps target)
+- Efficient canvas rendering
+- Throttled state persistence (1 second)
+
+### Browser Support
+- Modern browsers (Chrome, Firefox, Safari - latest versions)
+- Desktop-focused experience
+
+### Technology Constraints
+- React 18 with TypeScript
+- Redux Toolkit for state management
+- Canvas API for rendering
+
+## Future Considerations
+
+- Real-time collaboration
+- Backend integration for cloud storage
+- Export functionality (PNG, SVG, PDF)
+- Undo/redo functionality
+- Layer support
+- Text annotations on canvas
