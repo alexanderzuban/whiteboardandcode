@@ -18,12 +18,13 @@
     "lint": "npm run lint --workspaces --if-present",
     "deploy:dev": "npm run deploy:dev --workspace=@whiteboardandcode/infrastructure",
     "deploy:prod": "npm run deploy:prod --workspace=@whiteboardandcode/infrastructure",
-    "clean": "rm -rf packages/*/dist packages/*/node_modules node_modules"
+    "clean": "rm -rf packages/*/dist packages/*/build packages/*/node_modules node_modules"
   },
   "devDependencies": {
-    "concurrently": "^8.2.0"
+    "concurrently": "^9.1.0"
   },
   "engines": {
-    "node": ">=18.0.0"
-  }
+    "node": ">=22.0.0"
+  },
+  "packageManager": "npm@10.9.0"
 }

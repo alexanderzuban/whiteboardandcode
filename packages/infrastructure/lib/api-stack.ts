@@ -20,7 +20,7 @@ export class ApiStack extends cdk.Stack {
     // API Lambda function
     const apiHandler = new lambda.Function(this, 'ApiHandler', {
       functionName: `whiteboard-api-${props.environment}`,
-      runtime: lambda.Runtime.NODEJS_20_X,
+      runtime: lambda.Runtime.NODEJS_22_X,
       handler: 'handlers/api.handler',
       code: lambda.Code.fromAsset(path.join(__dirname, '../../server/dist')),
       timeout: cdk.Duration.seconds(30),
