@@ -7,10 +7,10 @@ export default class Selection {
 
     paint(rect: Nullable<Rect>, context2d: CanvasRenderingContext2D): void {
         if (rect) {
-            const maxX = rect.topLeft.x - 4;
-            const maxY = rect.topLeft.y - 4;
-            const minX = rect.bottomRight.x + 4;
-            const minY = rect.bottomRight.y + 4;
+            const minX = rect.topLeft.x - 4;
+            const minY = rect.topLeft.y - 4;
+            const maxX = rect.bottomRight.x + 4;
+            const maxY = rect.bottomRight.y + 4;
 
             context2d.save();
             context2d.beginPath();

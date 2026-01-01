@@ -80,17 +80,49 @@ const drawing = newDrawingInstance();
 // Returns initialized DrawingDocument with UUID
 ```
 
+## Visual Rendering
+
+### Line Quality
+All shapes use rounded line caps and joins for smooth rendering:
+```typescript
+// In drawig-shape-painter-base.ts
+context2d.lineCap = "round";
+context2d.lineJoin = "round";
+```
+
+### Hover Feedback
+When hovering over shapes, visual feedback is provided:
+- Rounded rectangle highlight around shape bounding box
+- Semi-transparent fill with selection color
+- Cursor changes to "pointer"
+- Uses cross-browser compatible `drawRoundedRect()` helper
+
+### Selection Display
+Selection is shown with:
+- Dashed border around selected shapes
+- Resize bullets at corners (centered on corner coordinates)
+- Theme-consistent colors from `appTheme.ui.selectionColor`
+
 ## Extension Points
 
 ### Adding a New Shape Type
 1. Create files in `Shape/NewType/`:
    - `shape-newtype.ts` - Data model
    - `shape-newtype-behavior.ts` - Interaction logic
-   - `shape-newtype-painter.ts` - Rendering
+   - `shape-newtype-painter.ts` - Rendering (extend `DrawigShapePainterBase`)
 2. Export from `Shape/shapes.ts`
 3. Add profile in `Profile/shape-profiles.ts`
 
 ### Adding a New Operation
 1. Create folder in `Operation/NewOp/`
 2. Implement operation state machine
-3. Export from `Operation/operations.ts`
+3. Create painter for visual feedback if needed
+4. Export from `Operation/operations.ts`
+
+## Best Practices
+
+### Canvas Drawing
+- Use `drawRoundedRect()` helper instead of `roundRect()` for cross-browser support
+- Always call `save()` before and `restore()` after drawing
+- Apply `translate(0.5, 0.5)` for crisp 1px lines
+- Use `lineCap` and `lineJoin` for smooth paths

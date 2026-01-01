@@ -64,15 +64,17 @@ AWS CDK infrastructure definitions.
 ## Dependency Management
 
 ### Internal Dependencies
-Use `workspace:*` protocol:
+Use `*` for npm workspace dependencies (npm resolves these locally):
 
 ```json
 {
   "dependencies": {
-    "@whiteboardandcode/shared": "workspace:*"
+    "@whiteboardandcode/shared": "*"
   }
 }
 ```
+
+> Note: `workspace:*` is pnpm/yarn syntax. For npm workspaces, use `*` which resolves to local packages.
 
 ### Installing Dependencies
 ```bash
@@ -136,6 +138,6 @@ npm run clean
 
 1. **Shared types go in `shared` package** - Avoid duplicating types
 2. **Build shared first** - Other packages depend on it
-3. **Use workspace protocol** - `workspace:*` for internal deps
+3. **Use `*` for internal deps** - npm resolves to local workspace packages
 4. **Scope all packages** - `@whiteboardandcode/*`
 5. **Keep root minimal** - Only dev tools at root level

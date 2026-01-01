@@ -3,6 +3,28 @@ import {Painter} from "../operations";
 import {DrawingContext} from "../../Shape/shapes";
 import {appTheme} from "../../../Style/theme";
 
+/**
+ * Draws a rounded rectangle path (cross-browser compatible)
+ */
+function drawRoundedRect(
+    ctx: CanvasRenderingContext2D,
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    radius: number
+): void {
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + width - radius, y);
+    ctx.arcTo(x + width, y, x + width, y + radius, radius);
+    ctx.lineTo(x + width, y + height - radius);
+    ctx.arcTo(x + width, y + height, x + width - radius, y + height, radius);
+    ctx.lineTo(x + radius, y + height);
+    ctx.arcTo(x, y + height, x, y + height - radius, radius);
+    ctx.lineTo(x, y + radius);
+    ctx.arcTo(x, y, x + radius, y, radius);
+    ctx.closePath();
+}
 
 export class OperationHoverPainter implements Painter {
     paint(operation: OperationHover, context: DrawingContext, context2d: CanvasRenderingContext2D): void {
@@ -29,12 +51,12 @@ export class OperationHoverPainter implements Painter {
         const width = rect.bottomRight.x - rect.topLeft.x + padding * 2;
         const height = rect.bottomRight.y - rect.topLeft.y + padding * 2;
 
-        // Outer glow
+        // Outer glow with rounded corners (cross-browser compatible)
         context2d.strokeStyle = appTheme.ui.selectionColor;
         context2d.lineWidth = 2;
         context2d.globalAlpha = 0.5;
         context2d.setLineDash([]);
-        context2d.roundRect(x, y, width, height, 3);
+        drawRoundedRect(context2d, x, y, width, height, 3);
         context2d.stroke();
 
         // Inner subtle fill

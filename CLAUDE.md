@@ -126,7 +126,7 @@ npm run build --workspace=@whiteboardandcode/infrastructure
 
 ## Development Notes
 
-- Use `workspace:*` for internal package dependencies
+- Use `*` for internal package dependencies (npm workspaces resolve locally)
 - Build shared package first: `npm run build:shared`
 - Local dev uses in-memory store; production uses DynamoDB
 - Frontend port: 3000, Backend port: 3001

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@whiteboardandcode/shared": "workspace:*",
+    "@whiteboardandcode/shared": "*",
     "@fortawesome/fontawesome-svg-core": "^6.7.0",
     "@fortawesome/pro-duotone-svg-icons": "^6.7.0",
     "@fortawesome/pro-light-svg-icons": "^6.7.0",

@@ -10,6 +10,9 @@ export default abstract class DrawigShapePainterBase implements DrawingShapePain
         if (shape.style?.lineColor !== "") {
             context2d.strokeStyle = shape.style?.lineColor ?? "black";
         }
+        // Smoother line rendering with rounded caps and joins
+        context2d.lineCap = "round";
+        context2d.lineJoin = "round";
     }
 
     protected startPath(context2d: CanvasRenderingContext2D) {

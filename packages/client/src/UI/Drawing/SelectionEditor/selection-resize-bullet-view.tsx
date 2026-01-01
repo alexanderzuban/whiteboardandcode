@@ -16,24 +16,27 @@ interface SelectionResizeBulletViewState {
 
 
 
+const BULLET_SIZE = 16;
+const BULLET_OFFSET = BULLET_SIZE / 2;
+
 const SelectionResizeBulletView: React.FC<SelectionResizeBulletViewProps> = (props) => {
     logger.render("SelectionResizeBulletView");
 
     const theme = useTheme()
 
-
-
+    // Center the bullet on the given coordinates by offsetting by half its size
     return <div style={{
                 position:"fixed",
                 margin:0,
                 padding:0,
-                top: `${props.top}px`,
-                left: `${props.left}px`,
+                top: `${props.top - BULLET_OFFSET}px`,
+                left: `${props.left - BULLET_OFFSET}px`,
+                color: theme.ui.selectionColor,
+                pointerEvents: "none",
             }}>
         <FontAwesomeIcon
             icon={['fas','circle']}
-            fontSize={16}
-
+            fontSize={BULLET_SIZE}
         />
     </div>
 }

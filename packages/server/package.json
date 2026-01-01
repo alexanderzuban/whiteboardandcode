@@ -13,7 +13,7 @@
     "lint": "eslint src"
   },
   "dependencies": {
-    "@whiteboardandcode/shared": "workspace:*",
+    "@whiteboardandcode/shared": "*",
     "@fastify/aws-lambda": "^5.0.0",
     "@fastify/cors": "^10.0.0",
     "@fastify/websocket": "^11.0.0",
