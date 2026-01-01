@@ -18,7 +18,18 @@ import {
 import {CssCursors} from "../../../Common/css-cursors";
 import {newInfoDocument} from "../../../Text/Store/text-document";
 import {drawingMoveOrigin} from "../../../Drawing/Store/drawing-document-in-dispatch";
-import {deleteFile, newDrawingDocument, newTextDocument, selectFileForEdit} from "./content-in-dispatch";
+import {
+    deleteFile,
+    newDrawingDocument,
+    newTextDocument,
+    selectFileForEdit,
+    renameFile,
+    markFileSaved,
+    closeOtherFiles,
+    closeFilesToLeft,
+    closeFilesToRight,
+    closeSavedFiles
+} from "./content-in-dispatch";
 import {newDrawingInstance} from "../../../Drawing/Store/drawing-document";
 import {textDocumentSelectSyntax, textDocumentUpdate} from "../../../Text/Store/text-document-in-dispatch";
 
@@ -83,6 +94,12 @@ const sliceContent = createSlice({
         newTextDocument,
         selectFileForEdit,
         deleteFile,
+        renameFile,
+        markFileSaved,
+        closeOtherFiles,
+        closeFilesToLeft,
+        closeFilesToRight,
+        closeSavedFiles,
 
         textDocumentUpdate,
         textDocumentSelectSyntax
